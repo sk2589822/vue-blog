@@ -1,36 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">
-        Home
-      </router-link>|
-      <router-link to="/about">
-        About
-      </router-link>
-    </div>
+    <TheHeader />
     <router-view />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import TheHeader from '@/components/general/TheHeader'
+
+export default {
+  components: {
+    TheHeader,
+  },
 }
+</script>
 
-#nav {
-  padding: 30px;
+<style lang="scss">
+  @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  * {
+      outline: 0;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
   }
+
+  html, body, #app {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    position: relative;
+    // display: grid;
+    // grid-template-columns: 1fr;
+    padding: 0;
+    color: #222;
+    background-color: #f3f6f9 !important;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.2rem;
+
+    a:hover {
+      text-decoration: none;
+    }
 }
 </style>
