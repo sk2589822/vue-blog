@@ -25,18 +25,18 @@
       </div>
     </div>
     <div>
-      <latestArticles />
+      <TheArticlesLatest />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import latestArticles from '@/components/user/TheArticlesLatest'
+import TheArticlesLatest from '@/components/user/TheArticlesLatest'
 
 export default {
   components: {
-    latestArticles,
+    TheArticlesLatest,
   },
   data() {
     return {

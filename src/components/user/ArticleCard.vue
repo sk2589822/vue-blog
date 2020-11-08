@@ -63,7 +63,9 @@ export default {
         return {}
       },
     },
-    preview: Boolean,
+    preview: {
+      type: Boolean,
+    },
   },
   data() {
     return {
