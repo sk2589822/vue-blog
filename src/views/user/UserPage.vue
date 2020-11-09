@@ -3,7 +3,7 @@
     <template v-if="isUserExists">
       <TheUserSection />
       <section class="grid-container contents">
-        <router-view class="grid-main" />
+        <router-view />
         <TheUserSidebar class="grid-sidebar" />
       </section>
     </template>
@@ -54,11 +54,6 @@ export default {
     justify-content: center;
     align-items: center;
     grid-template-columns: 700px 290px;
-  }
-
-  .grid-main {
-    display: grid;
-    grid-column: 1/2;
   }
 
   .user-not-found {
