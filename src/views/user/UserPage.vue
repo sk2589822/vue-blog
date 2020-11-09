@@ -1,14 +1,24 @@
 <template>
   <div>
-    <TheUserSection />
-    <section class="grid-container contents">
-      <router-view class="grid-main" />
-      <TheUserSidebar class="grid-sidebar" />
-    </section>
+    <template v-if="isUserExists">
+      <TheUserSection />
+      <section class="grid-container contents">
+        <router-view class="grid-main" />
+        <TheUserSidebar class="grid-sidebar" />
+      </section>
+    </template>
+    <template v-else>
+      <div class="user-not-found">
+        <h1>
+          找不到這個人耶
+        </h1>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
+import { db } from '@/store/firebase.js'
 import TheUserSection from '@/components/user/TheUserSection'
 import TheUserSidebar from '@/components/user/TheUserSidebar'
 
@@ -16,6 +26,19 @@ export default {
   components: {
     TheUserSection,
     TheUserSidebar,
+  },
+  data() {
+    return {
+      isUserExists: true,
+    }
+  },
+  created: async function() {
+    const userRef = db.collection('Users').doc(this.$route.params.account)
+    const userDoc = await userRef.get()
+
+    if (!userDoc.exists) {
+      this.isUserExists = false
+    }
   },
 }
 </script>
@@ -36,5 +59,12 @@ export default {
   .grid-main {
     display: grid;
     grid-column: 1/2;
+  }
+
+  .user-not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
   }
 </style>
