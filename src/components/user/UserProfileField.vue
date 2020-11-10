@@ -71,6 +71,11 @@ export default {
       return this.fieldValue.split('\n')
     },
   },
+  watch: {
+    fieldValue(val) {
+      this.childFieldValue = val
+    },
+  },
 }
 </script>
 

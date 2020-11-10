@@ -4,7 +4,7 @@
       <div class="user-img-container">
         <img
           class="user-img"
-          :src="userBannerSrc"
+          :src="authorBannerSrc"
           alt="圖呢"
         >
       </div>
@@ -27,28 +27,13 @@
 </template>
 
 <script>
-import { db } from '@/store/firebase.js'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      userBannerSrc: '',
-    }
-  },
-  created() {
-    this.getUserBannerSrc()
-  },
-  methods: {
-    getUserBannerSrc: async function() {
-      const userRef = db.collection('Users').doc(this.$route.params.account)
-      const userDoc = await userRef.get()
-
-      if (userDoc?.data()?.bannerSrc) {
-        this.userBannerSrc = userDoc.data().bannerSrc
-      } else {
-        this.userBannerSrc = 'https://i.imgur.com/v3WqLYF.png'
-      }
-    },
+  computed: {
+    ...mapGetters([
+      'authorBannerSrc',
+    ]),
   },
 }
 </script>

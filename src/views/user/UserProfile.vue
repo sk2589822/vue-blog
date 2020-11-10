@@ -1,76 +1,73 @@
 <template>
   <section class="profile-section">
-    <!-- prevent components initializing brefore data loaded -->
-    <template v-if="isDataLoaded">
-      <b-button
-        v-if="isMyPage"
-        v-show="!isEditing"
-        variant="primary"
-        size="sm"
-        class="edit-button"
-        @click="isEditing = true"
-      >
-        🖉
-      </b-button>
+    <b-button
+      v-if="isMyPage"
+      v-show="!isEditing"
+      variant="primary"
+      size="sm"
+      class="edit-button"
+      @click="isEditing = true"
+    >
+      🖉
+    </b-button>
+    <UserProfileField
+      field-name="暱稱"
+      :field-value.sync="author.nickname"
+      :is-editing="isEditing"
+      :tag="'input'"
+    />
+    <template v-if="isEditing">
       <UserProfileField
-        field-name="暱稱"
-        :field-value.sync="userNickname"
+        v-for="(info, index) in 3"
+        :key="index"
+        :field-name="`側邊欄資訊 ${index + 1}`"
+        :field-value.sync="author.sidebarInfo[index]"
         :is-editing="isEditing"
         :tag="'input'"
       />
-      <template v-if="isEditing">
-        <UserProfileField
-          v-for="(info, index) in 3"
-          :key="index"
-          :field-name="`側邊欄資訊 ${index + 1}`"
-          :field-value.sync="userSidebarInfo[index]"
-          :is-editing="isEditing"
-          :tag="'input'"
-        />
-        <UserProfileField
-          field-name="橫幅圖片網址"
-          :field-value.sync="userBannerSrc"
-          :is-editing="isEditing"
-          :tag="'input'"
-          help-message="幫我把圖片網址貼上來，上傳圖片晚點做"
-        />
-        <UserProfileField
-          field-name="大頭貼圖片網址"
-          :field-value.sync="userPhotoSrc"
-          :is-editing="isEditing"
-          :tag="'input'"
-          :help-message="'請看上面的問號'"
-        />
-      </template>
       <UserProfileField
-        field-name="自我介紹"
-        :field-value.sync="userIntroduce"
-        class="introduce"
+        field-name="橫幅圖片網址"
+        :field-value.sync="author.bannerSrc"
         :is-editing="isEditing"
-        :tag="'textarea'"
+        :tag="'input'"
+        help-message="幫我把圖片網址貼上來，上傳圖片晚點做"
       />
-      <b-button
-        v-if="isMyPage"
-        v-show="isEditing"
-        variant="primary"
-        class="confirm-button"
-        @click="updateUserProfile"
-      >
-        儲存
-      </b-button>
-      <b-button
-        v-if="isMyPage"
-        v-show="isEditing"
-        class="cancel-button"
-        @click="cancelEdit"
-      >
-        取消
-      </b-button>
+      <UserProfileField
+        field-name="大頭貼圖片網址"
+        :field-value.sync="author.photoSrc"
+        :is-editing="isEditing"
+        :tag="'input'"
+        :help-message="'請看上面的問號'"
+      />
     </template>
+    <UserProfileField
+      field-name="自我介紹"
+      :field-value.sync="author.introduce"
+      class="introduce"
+      :is-editing="isEditing"
+      :tag="'textarea'"
+    />
+    <b-button
+      v-if="isMyPage"
+      v-show="isEditing"
+      variant="primary"
+      class="confirm-button"
+      @click="updateUserProfile"
+    >
+      儲存
+    </b-button>
+    <b-button
+      v-if="isMyPage"
+      v-show="isEditing"
+      class="cancel-button"
+      @click="cancelEdit"
+    >
+      取消
+    </b-button>
   </section>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import { db } from '@/store/firebase.js'
 import UserProfileField from '@/components/user/UserProfileField'
 
@@ -83,20 +80,27 @@ export default {
   },
   data() {
     return {
-      isDataLoaded: false,
       isEditing: false,
-      userNickname: '',
-      userSidebarInfo: [],
-      userBannerSrc: '',
-      userPhotoSrc: '',
-      userIntroduce: '',
-      originData: [],
+      author: {
+        nickname: '',
+        sidebarInfo: '',
+        bannerSrc: '',
+        photoSrc: '',
+        pntroduce: '',
+      },
     }
   },
   computed: {
     ...mapState({
       account: state => state.user.userInfo.account,
+      authorNickname: state => state.author.authorInfo.nickname,
+      authorSidebarInfo: state => state.author.authorInfo.sidebarInfo,
+      authorIntroduce: state => state.author.authorInfo.introduce,
     }),
+    ...mapGetters([
+      'authorPhotoSrc',
+      'authorBannerSrc',
+    ]),
     isMyPage() {
       if (this.account !== undefined) {
         return this.account === this.$route.params.account
@@ -104,44 +108,26 @@ export default {
       return false
     },
   },
-  created() {
-    this.getProfileData()
+  mounted() {
+    this.setAuthorInfo()
   },
   methods: {
-    getProfileData: async function() {
-      const userRef = db.collection('Users').doc(this.$route.params.account)
-      const userDoc = await userRef.get()
-      if (userDoc.exists) {
-        this.isDataLoaded = true
-        const userData = userDoc.data()
-
-        this.userNickname = userData.nickname
-        this.userSidebarInfo = userData.sidebarInfo
-        this.userBannerSrc = userData.bannerSrc
-        this.userPhotoSrc = userData.photoSrc
-        this.userIntroduce = userData.introduce
-
-        this.originData = userData
-      }
-    },
     updateUserProfile: async function() {
       const userRef = db.collection('Users').doc(this.$route.params.account)
-      await userRef.update({
-        nickname: this.userNickname,
-        sidebarInfo: this.userSidebarInfo,
-        bannerSrc: this.userBannerSrc,
-        photoSrc: this.userPhotoSrc,
-        introduce: this.userIntroduce,
-      })
+      await userRef.update(this.author)
       this.isEditing = false
     },
+    setAuthorInfo() {
+      this.author = {
+        nickname: this.authorNickname,
+        sidebarInfo: this.authorSidebarInfo,
+        bannerSrc: this.authorBannerSrc,
+        photoSrc: this.authorPhotoSrc,
+        introduce: this.authorIntroduce,
+      }
+    },
     cancelEdit() {
-      this.userNickname = this.originData.nickname
-      this.userSidebarInfo = this.originData.sidebarInfo
-      this.userBannerSrc = this.originData.bannerSrc
-      this.userPhotoSrc = this.originData.photoSrc
-      this.userIntroduce = this.originData.introduce
-
+      this.setAuthorInfo()
       this.isEditing = false
     },
   },

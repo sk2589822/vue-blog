@@ -85,6 +85,58 @@ const moduleUser = {
   },
 }
 
+const moduleAuthor = {
+  state: {
+    isAuthorExists: false,
+    authorInfo: {
+      nickname: '',
+      sidebarInfo: [],
+      bannerSrc: '',
+      photoSrc: '',
+      introduce: '',
+    },
+  },
+  mutations: {
+    fetchAuthorInfo: (state, payload) => {
+      state.isAuthorExists = true
+      state.authorInfo.nickname = payload.nickname
+      state.authorInfo.sidebarInfo = payload.sidebarInfo
+      state.authorInfo.bannerSrc = payload.bannerSrc
+      state.authorInfo.photoSrc = payload.photoSrc
+      state.authorInfo.introduce = payload.introduce
+    },
+  },
+  actions: {
+    fetchAuthorInfo: async ({ commit }, { account }) => {
+      const userRef = db.collection('Users').doc(account)
+      const userDoc = await userRef.get()
+      if (userDoc.exists) {
+        const userData = userDoc.data()
+        commit('fetchAuthorInfo', userData)
+      }
+    },
+  },
+  getters: {
+    authorBannerSrc: state => {
+      if (state.authorInfo.bannerSrc) {
+        return state.authorInfo.bannerSrc
+      } else {
+        return 'https://i.imgur.com/v3WqLYF.png'
+      }
+    },
+    authorPhotoSrc: state => {
+      if (state.authorInfo.photoSrc) {
+        return state.authorInfo.photoSrc
+      } else {
+        return 'https://i.imgur.com/VsCn3nL.png'
+      }
+    },
+    isAuthorExists: state => {
+      return state.isAuthorExists
+    },
+  },
+}
+
 const moduleArticle = {
   state: {
     articles: [],
@@ -121,6 +173,7 @@ const moduleArticle = {
 export default new Vuex.Store({
   modules: {
     user: moduleUser,
+    author: moduleAuthor,
     article: moduleArticle,
   },
 })

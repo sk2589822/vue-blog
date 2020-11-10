@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="isUserExists">
+    <template v-if="isAuthorExists">
       <TheUserSection />
       <section class="grid-container contents">
         <router-view />
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { db } from '@/store/firebase.js'
+import { mapGetters } from 'vuex'
 import TheUserSection from '@/components/user/TheUserSection'
 import TheUserSidebar from '@/components/user/TheUserSidebar'
 
@@ -29,16 +29,24 @@ export default {
   },
   data() {
     return {
-      isUserExists: true,
+      dataFetched: false,
     }
   },
-  created: async function() {
-    const userRef = db.collection('Users').doc(this.$route.params.account)
-    const userDoc = await userRef.get()
-
-    if (!userDoc.exists) {
-      this.isUserExists = false
-    }
+  computed: {
+    ...mapGetters([
+      'isAuthorExists',
+    ]),
+  },
+  mounted() {
+    this.fetchAuthorInfo()
+  },
+  methods: {
+    fetchAuthorInfo() {
+      const account = this.$route.params.account
+      this.$store.dispatch('fetchAuthorInfo', {
+        account,
+      })
+    },
   },
 }
 </script>

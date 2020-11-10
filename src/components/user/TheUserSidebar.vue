@@ -6,7 +6,7 @@
           <p class="user-photo-container">
             <img
               class="user-photo"
-              :src="userPhotoSrc"
+              :src="authorPhotoSrc"
             >
           </p>
         </li>
@@ -17,28 +17,13 @@
 </template>
 
 <script>
-import { db } from '@/store/firebase.js'
+import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      userPhotoSrc: '',
-    }
-  },
-  created() {
-    this.getUserPhotoSrc()
-  },
-  methods: {
-    getUserPhotoSrc: async function() {
-      const userRef = db.collection('Users').doc(this.$route.params.account)
-      const userDoc = await userRef.get()
-
-      if (userDoc?.data()?.photoSrc) {
-        this.userPhotoSrc = userDoc.data().photoSrc
-      } else {
-        this.userPhotoSrc = 'https://i.imgur.com/VsCn3nL.png'
-      }
-    },
+  computed: {
+    ...mapGetters([
+      'authorPhotoSrc',
+    ]),
   },
 }
 </script>
