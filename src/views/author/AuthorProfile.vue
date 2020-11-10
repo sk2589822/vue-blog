@@ -10,39 +10,39 @@
     >
       🖉
     </b-button>
-    <UserProfileField
+    <AuthorProfileField
       field-name="暱稱"
-      :field-value.sync="author.nickname"
+      :field-value.sync="authorInfo.nickname"
       :is-editing="isEditing"
       :tag="'input'"
     />
     <template v-if="isEditing">
-      <UserProfileField
+      <AuthorProfileField
         v-for="(info, index) in 3"
         :key="index"
         :field-name="`側邊欄資訊 ${index + 1}`"
-        :field-value.sync="author.sidebarInfo[index]"
+        :field-value.sync="authorInfo.sidebarInfo[index]"
         :is-editing="isEditing"
         :tag="'input'"
       />
-      <UserProfileField
+      <AuthorProfileField
         field-name="橫幅圖片網址"
-        :field-value.sync="author.bannerSrc"
+        :field-value.sync="authorInfo.bannerSrc"
         :is-editing="isEditing"
         :tag="'input'"
         help-message="幫我把圖片網址貼上來，上傳圖片晚點做"
       />
-      <UserProfileField
+      <AuthorProfileField
         field-name="大頭貼圖片網址"
-        :field-value.sync="author.photoSrc"
+        :field-value.sync="authorInfo.photoSrc"
         :is-editing="isEditing"
         :tag="'input'"
         :help-message="'請看上面的問號'"
       />
     </template>
-    <UserProfileField
+    <AuthorProfileField
       field-name="自我介紹"
-      :field-value.sync="author.introduce"
+      :field-value.sync="authorInfo.introduce"
       class="introduce"
       :is-editing="isEditing"
       :tag="'textarea'"
@@ -52,7 +52,7 @@
       v-show="isEditing"
       variant="primary"
       class="confirm-button"
-      @click="updateUserProfile"
+      @click="updateAuthorProfile"
     >
       儲存
     </b-button>
@@ -69,19 +69,19 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 import { db } from '@/store/firebase.js'
-import UserProfileField from '@/components/user/UserProfileField'
+import AuthorProfileField from '@/components/author/AuthorProfileField'
 
 // TODO: store images itself instead of store the url of images
 // TODO: reload images after update
 
 export default {
   components: {
-    UserProfileField,
+    AuthorProfileField,
   },
   data() {
     return {
       isEditing: false,
-      author: {
+      authorInfo: {
         nickname: '',
         sidebarInfo: '',
         bannerSrc: '',
@@ -112,13 +112,13 @@ export default {
     this.setAuthorInfo()
   },
   methods: {
-    updateUserProfile: async function() {
-      const userRef = db.collection('Users').doc(this.$route.params.account)
-      await userRef.update(this.author)
+    updateAuthorProfile: async function() {
+      const authorRef = db.collection('Users').doc(this.$route.params.account)
+      await authorRef.update(this.authorInfo)
       this.isEditing = false
     },
     setAuthorInfo() {
-      this.author = {
+      this.authorInfo = {
         nickname: this.authorNickname,
         sidebarInfo: this.authorSidebarInfo,
         bannerSrc: this.authorBannerSrc,

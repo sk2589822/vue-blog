@@ -1,22 +1,22 @@
 <template>
-  <section class="user-section">
-    <div class="user-section-contents">
-      <div class="user-img-container">
+  <section class="author-section">
+    <div class="author-section-contents">
+      <div class="author-img-container">
         <img
-          class="user-img"
+          class="author-img"
           :src="imgSrc"
           alt="圖呢"
         >
       </div>
-      <nav class="user-nav">
-        <ul class="user-nav-list">
-          <li class="user-nav-item">
-            <router-link to="/users/skink/profile">
+      <nav class="author-nav">
+        <ul class="author-nav-list">
+          <li class="author-nav-item">
+            <router-link to="/authors/skink/profile">
               個人檔案
             </router-link>
           </li>
-          <li class="user-nav-item">
-            <router-link to="/users/skink/">
+          <li class="author-nav-item">
+            <router-link to="/authors/skink/">
               文章列表
             </router-link>
           </li>
@@ -24,18 +24,18 @@
       </nav>
       <router-view />
       <section class="grid-container contents">
-        <TheUserSidebar class="grid-sidebar" />
+        <TheAuthorSidebar class="grid-sidebar" />
       </section>
     </div>
   </section>
 </template>
 
 <script>
-import TheUserSidebar from '@/components/user/TheUserSidebar'
+import TheAuthorSidebar from '@/components/author/TheAuthorSidebar'
 
 export default {
   components: {
-    TheUserSidebar,
+    TheAuthorSidebar,
   },
   data() {
     return {
@@ -48,26 +48,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .user-section {
+  .author-section {
     margin-top: 15px;
   }
 
-  .user-section-contents {
+  .author-section-contents {
     margin: 0 auto;
     width: 990px;
     background-color: #fff;
   }
 
-  .user-img-container {
+  .author-img-container {
     height: 330px;
   }
 
-  .user-img {
+  .author-img {
     width: 100%;
     height: 100%;
   }
 
-  .user-nav-list {
+  .author-nav-list {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -75,7 +75,7 @@ export default {
     border-top: 0;
   }
 
-  .user-nav-item {
+  .author-nav-item {
     width: 150px;
     list-style: none;
 

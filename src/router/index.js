@@ -7,25 +7,12 @@ import Home from '@/views/general/Home'
 import Login from '@/views/general/Login'
 import NotFound404 from '@/views/general/NotFound404'
 import Register from '@/views/general/Register'
-import UserArticle from '@/views/user/UserArticle'
-import UserArticles from '@/views/user/UserArticles'
-import UserProfile from '@/views/user/UserProfile'
-import UserPage from '@/views/user/UserPage'
-
+import AuthorArticle from '@/views/author/AuthorArticle'
+import AuthorArticles from '@/views/author/AuthorArticles'
+import AuthorProfile from '@/views/author/AuthorProfile'
+import AuthorPage from '@/views/author/AuthorPage'
 
 Vue.use(VueRouter)
-
-/*
-部落格首頁 /
-登入       /login
-註冊       /register
-個人首頁   /users/:id
-自我介紹   /users/:id/profile  (==自我介紹)
-文章列表   /users/:id/articles (可分詳細/清單)
-文章內容   /users/:id/articles/:artId
-新增文章   /users/:id/articles/add
-修改文章   /users/:id/articles/edit/:artId
-*/
 
 const routes = [
   {
@@ -44,27 +31,27 @@ const routes = [
     component: Register,
   },
   {
-    path: '/users/:account',
-    component: UserPage,
+    path: '/authors/:account',
+    component: AuthorPage,
     children: [
       {
         path: '',
-        name: 'UserPage',
-        component: UserArticles,
+        name: 'AuthorPage',
+        component: AuthorArticles,
       },
       {
         path: 'profile',
-        component: UserProfile,
+        component: AuthorProfile,
       },
       {
         path: 'articles/:page?',
-        name: 'UserArticles',
-        component: UserArticles,
+        name: 'AuthorArticles',
+        component: AuthorArticles,
       },
       {
         path: 'article/:id',
-        name: 'UserArticle',
-        component: UserArticle,
+        name: 'AuthorArticle',
+        component: AuthorArticle,
       },
     ],
   },

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ArticleCard from '@/components/user/ArticleCard'
+import ArticleCard from '@/components/author/ArticleCard'
 import { mapState } from 'vuex'
 
 export default {

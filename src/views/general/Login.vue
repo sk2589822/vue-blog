@@ -93,7 +93,7 @@ export default {
       }).then(sessionId => {
         this.$cookies.set('session_id', sessionId, 60 * 60) // stroe cookie for 1 hour
         this.$router.push({
-          name:'UserPage',
+          name:'AuthorPage',
           params: {
             account: this.account,
 

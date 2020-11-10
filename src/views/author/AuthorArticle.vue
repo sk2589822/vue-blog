@@ -32,7 +32,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import TheArticlesLatest from '@/components/user/TheArticlesLatest'
+import TheArticlesLatest from '@/components/author/TheArticlesLatest'
 
 export default {
   components: {

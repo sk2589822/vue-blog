@@ -117,7 +117,7 @@ export default {
     },
     backToArticles() {
       this.$router.push({
-        name: 'UserArticles',
+        name: 'AuthorArticles',
         params: {
           account: this.account,
         },

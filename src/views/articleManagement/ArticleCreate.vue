@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     backToArticles() {
-      this.$router.push({ name: 'UserArticles' })
+      this.$router.push({ name: 'AuthorArticles' })
     },
   },
 }

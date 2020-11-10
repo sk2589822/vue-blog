@@ -1,18 +1,18 @@
 <template>
   <div>
-    <TheUserSection />
-    <section class=" contents">
+    <TheAuthorSection />
+    <section class="contents">
       <router-view />
     </section>
   </div>
 </template>
 
 <script>
-import TheUserSection from '@/components/user/TheUserSection'
+import TheAuthorSection from '@/components/author/TheAuthorSection'
 
 export default {
   components: {
-    TheUserSection,
+    TheAuthorSection,
   },
 }
 </script>

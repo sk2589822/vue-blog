@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import ArticleCard from '@/components/user/ArticleCard'
+import ArticleCard from '@/components/author/ArticleCard'
 import { mapState } from 'vuex'
 
 export default {
@@ -107,7 +107,7 @@ export default {
     },
     linkGen(page) {
        return {
-        name: 'UserArticles',
+        name: 'AuthorArticles',
         params: { page },
       }
     },

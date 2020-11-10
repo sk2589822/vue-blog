@@ -2,10 +2,10 @@
   <aside class="sidebar-container">
     <div class="sidebar">
       <ul class="sidebar-list">
-        <li class="sidebar-item user-info">
-          <p class="user-photo-container">
+        <li class="sidebar-item author-info">
+          <p class="author-photo-container">
             <img
-              class="user-photo"
+              class="author-photo"
               :src="authorPhotoSrc"
             >
           </p>
@@ -37,7 +37,7 @@ export default {
     list-style: none;
   }
 
-  .user-photo-container {
+  .author-photo-container {
     margin: auto;
     border-radius: 50%;
     width: 200px;
@@ -45,7 +45,7 @@ export default {
     overflow: hidden;
   }
 
-  .user-photo {
+  .author-photo {
     width: 100%;
     height: 100%;
   }

@@ -108,11 +108,11 @@ const moduleAuthor = {
   },
   actions: {
     fetchAuthorInfo: async ({ commit }, { account }) => {
-      const userRef = db.collection('Users').doc(account)
-      const userDoc = await userRef.get()
-      if (userDoc.exists) {
-        const userData = userDoc.data()
-        commit('fetchAuthorInfo', userData)
+      const authorRef = db.collection('Users').doc(account)
+      const authorDoc = await authorRef.get()
+      if (authorDoc.exists) {
+        const authorData = authorDoc.data()
+        commit('fetchAuthorInfo', authorData)
       }
     },
   },
@@ -150,7 +150,7 @@ const moduleArticle = {
     fetchArticles: async ({ commit }, { account }) => {
       const articles = await db
         .collection('Articles')
-        .where('user', '==', account)
+        .where('author', '==', account)
         .orderBy('postDate', 'desc')
         .get()
 

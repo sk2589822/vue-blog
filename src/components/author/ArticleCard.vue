@@ -98,9 +98,8 @@ export default {
     ]),
     toArticle(id) {
       this.$router.push({
-        name: 'UserArticle',
+        name: 'AuthorArticle',
         params: {
-          userId: this.article.userId,
           id,
         },
       })
