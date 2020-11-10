@@ -14,7 +14,7 @@
       </b-button>
       <UserProfileField
         field-name="暱稱"
-        :field-value.sync="nickname"
+        :field-value.sync="userNickname"
         :is-editing="isEditing"
         :tag="'input'"
       />
@@ -23,20 +23,20 @@
           v-for="(info, index) in 3"
           :key="index"
           :field-name="`側邊欄資訊 ${index + 1}`"
-          :field-value.sync="sidebarInfo[index]"
+          :field-value.sync="userSidebarInfo[index]"
           :is-editing="isEditing"
           :tag="'input'"
         />
         <UserProfileField
           field-name="橫幅圖片網址"
-          :field-value.sync="bannerSrc"
+          :field-value.sync="userBannerSrc"
           :is-editing="isEditing"
           :tag="'input'"
           help-message="幫我把圖片網址貼上來，上傳圖片晚點做"
         />
         <UserProfileField
           field-name="大頭貼圖片網址"
-          :field-value.sync="photoSrc"
+          :field-value.sync="userPhotoSrc"
           :is-editing="isEditing"
           :tag="'input'"
           :help-message="'請看上面的問號'"
@@ -44,7 +44,7 @@
       </template>
       <UserProfileField
         field-name="自我介紹"
-        :field-value.sync="introduce"
+        :field-value.sync="userIntroduce"
         class="introduce"
         :is-editing="isEditing"
         :tag="'textarea'"
@@ -85,11 +85,11 @@ export default {
     return {
       isDataLoaded: false,
       isEditing: false,
-      nickname: '',
-      sidebarInfo: [],
-      bannerSrc: '',
-      photoSrc: '',
-      introduce: '',
+      userNickname: '',
+      userSidebarInfo: [],
+      userBannerSrc: '',
+      userPhotoSrc: '',
+      userIntroduce: '',
       originData: [],
     }
   },
@@ -115,11 +115,11 @@ export default {
         this.isDataLoaded = true
         const userData = userDoc.data()
 
-        this.nickname = userData.nickname
-        this.sidebarInfo = userData.sidebarInfo
-        this.bannerSrc = userData.bannerSrc
-        this.photoSrc = userData.photoSrc
-        this.introduce = userData.introduce
+        this.userNickname = userData.nickname
+        this.userSidebarInfo = userData.sidebarInfo
+        this.userBannerSrc = userData.bannerSrc
+        this.userPhotoSrc = userData.photoSrc
+        this.userIntroduce = userData.introduce
 
         this.originData = userData
       }
@@ -127,20 +127,20 @@ export default {
     updateUserProfile: async function() {
       const userRef = db.collection('Users').doc(this.$route.params.account)
       await userRef.update({
-        nickname: this.nickname,
-        sidebarInfo: this.sidebarInfo,
-        bannerSrc: this.bannerSrc,
-        photoSrc: this.photoSrc,
-        introduce: this.introduce,
+        nickname: this.userNickname,
+        sidebarInfo: this.userSidebarInfo,
+        bannerSrc: this.userBannerSrc,
+        photoSrc: this.userPhotoSrc,
+        introduce: this.userIntroduce,
       })
       this.isEditing = false
     },
     cancelEdit() {
-      this.nickname = this.originData.nickname
-      this.sidebarInfo = this.originData.sidebarInfo
-      this.bannerSrc = this.originData.bannerSrc
-      this.photoSrc = this.originData.photoSrc
-      this.introduce = this.originData.introduce
+      this.userNickname = this.originData.nickname
+      this.userSidebarInfo = this.originData.sidebarInfo
+      this.userBannerSrc = this.originData.bannerSrc
+      this.userPhotoSrc = this.originData.photoSrc
+      this.userIntroduce = this.originData.introduce
 
       this.isEditing = false
     },
