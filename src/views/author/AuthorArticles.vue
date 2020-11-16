@@ -1,6 +1,6 @@
 <template>
-  <section class="articles-section">
-    <div class="view-options">
+  <section>
+    <div class="functions-bar">
       <b-button
         v-if="isMyPage"
         variant="primary"
@@ -9,7 +9,7 @@
       >
         發新文章
       </b-button>
-      <b-button-group class="float-right">
+      <b-button-group class="view-options">
         <b-button
           variant="outline-primary"
           :class="[{ active: isPreviewMode }, 'view-mode-button']"
@@ -120,20 +120,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .articles-section {
-    padding: 1px;
-    width: 90%;
-  }
-
   @mixin main-theme {
     border: 1px solid #ddd;
     background: #fff;
   }
 
-  .view-options {
+  .functions-bar {
     @include main-theme;
+    display: flex;
     padding: 17px 15px;
     margin-bottom: 20px;
+  }
+
+  .view-options {
+    margin-left: auto;
   }
 
   .btn {

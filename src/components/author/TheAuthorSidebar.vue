@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidebar-container">
+  <aside>
     <div class="sidebar">
       <ul class="sidebar-list">
         <li class="sidebar-item author-info">
@@ -29,8 +29,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .sidebar-container{
-    margin: 10px auto auto auto;
+  .sidebar {
+    border: 1px solid rgba(0,0,0,.12);
+    background-color: #fff;
+    margin: 0 0 15px;
+    position: relative;
   }
 
   .sidebar-item {

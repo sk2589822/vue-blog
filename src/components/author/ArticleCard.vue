@@ -14,21 +14,20 @@
       </a>
       <b-button
         v-if="showFunctionButtons"
-        class="float-right"
+        variant="primary"
+        size="sm"
+        class="edit-button"
+        :to="{ name: 'ArticleEdit', params: { id: article.id } }"
+      >
+        修改
+      </b-button>
+      <b-button
+        v-if="showFunctionButtons"
         variant="danger"
         size="sm"
         @click="deleteArticle(article.id)"
       >
         刪除
-      </b-button>
-      <b-button
-        v-if="showFunctionButtons"
-        class="float-right"
-        variant="primary"
-        size="sm"
-        :to="{ name: 'ArticleEdit', params: { id: article.id } }"
-      >
-        修改
       </b-button>
     </p>
     <p class="post-date">
@@ -158,13 +157,19 @@ export default {
   }
 
   .article-header {
+    display: flex;
     margin-bottom: 0.1rem;
     height: 34px;
 
     .btn {
       margin: 0.2em 0 0 1em;
     }
+
+    .btn.edit-button {
+      margin-left: auto;
+    }
   }
+
 
   .article-title {
     justify-self: left;

@@ -3,7 +3,7 @@
     <template v-if="isAuthorExists">
       <TheAuthorSection />
       <section class="grid-container contents">
-        <router-view />
+        <router-view class="grid-main" />
         <TheAuthorSidebar class="grid-sidebar" />
       </section>
     </template>
@@ -62,6 +62,17 @@ export default {
     justify-content: center;
     align-items: center;
     grid-template-columns: 700px 290px;
+  }
+
+  .grid-main {
+    grid-column: 1 / 2;
+    grid-row: 3 / 6;
+  }
+
+  .grid-sidebar{
+    margin-left: 15px;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
   }
 
   .author-not-found {

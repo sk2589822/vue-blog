@@ -20,15 +20,7 @@
     </div>
     <p class="editor-functions">
       <b-button
-        variant="danger"
-        class="float-right"
-        @click.prevent="backToArticles"
-      >
-        取消
-      </b-button>
-      <b-button
         variant="primary"
-        class="float-right"
         :disabled="submitted"
         @click.prevent="submitArticleData"
       >
@@ -37,6 +29,12 @@
           small
         />
         <slot name="actionName" />
+      </b-button>
+      <b-button
+        variant="danger"
+        @click.prevent="backToArticles"
+      >
+        取消
       </b-button>
     </p>
   </form>
@@ -141,7 +139,8 @@ export default {
   }
 
   .editor-functions {
-    height: 30px;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .btn {
