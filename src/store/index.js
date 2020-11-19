@@ -89,6 +89,7 @@ const moduleAuthor = {
   state: {
     isAuthorExists: false,
     authorInfo: {
+      account: '',
       nickname: '',
       sidebarInfo: [],
       bannerSrc: '',
@@ -99,6 +100,7 @@ const moduleAuthor = {
   mutations: {
     fetchAuthorInfo: (state, payload) => {
       state.isAuthorExists = true
+      state.authorInfo.account = payload.account
       state.authorInfo.nickname = payload.nickname
       state.authorInfo.sidebarInfo = payload.sidebarInfo
       state.authorInfo.bannerSrc = payload.bannerSrc
@@ -112,7 +114,10 @@ const moduleAuthor = {
       const authorDoc = await authorRef.get()
       if (authorDoc.exists) {
         const authorData = authorDoc.data()
-        commit('fetchAuthorInfo', authorData)
+        commit('fetchAuthorInfo', {
+          account,
+          ...authorData,
+        })
       }
     },
   },

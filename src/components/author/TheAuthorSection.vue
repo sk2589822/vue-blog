@@ -11,12 +11,12 @@
       <nav class="author-nav">
         <ul class="author-nav-list">
           <li class="author-nav-item">
-            <router-link to="/authors/skink/profile">
+            <router-link :to="`/authors/${authorAccount}/profile`">
               個人檔案
             </router-link>
           </li>
           <li class="author-nav-item">
-            <router-link to="/authors/skink/">
+            <router-link :to="`/authors/${authorAccount}/`">
               文章列表
             </router-link>
           </li>
@@ -27,10 +27,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   computed: {
+    ...mapState({
+      authorAccount: state => state.author.authorInfo.account,
+    }),
     ...mapGetters([
       'authorBannerSrc',
     ]),
