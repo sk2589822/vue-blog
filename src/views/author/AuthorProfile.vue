@@ -141,7 +141,6 @@ export default {
     border: 1px solid rgba(0, 0, 0, 0.12);
     padding: 30px 50px;
     background-color: #fff;
-    width: 90%;
   }
 
   .edit-button {
