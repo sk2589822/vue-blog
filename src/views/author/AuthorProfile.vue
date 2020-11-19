@@ -94,8 +94,15 @@ export default {
     ...mapState({
       account: state => state.user.userInfo.account,
       authorNickname: state => state.author.authorInfo.nickname,
-      authorSidebarInfo: state => state.author.authorInfo.sidebarInfo,
       authorIntroduce: state => state.author.authorInfo.introduce,
+      authorSidebarInfo(state){
+        const sidebarInfo = state.author.authorInfo.sidebarInfo
+        if (sidebarInfo === undefined) {
+          return [...Array(3)]
+        } else {
+          return sidebarInfo
+        }
+      },
     }),
     ...mapGetters([
       'authorPhotoSrc',
