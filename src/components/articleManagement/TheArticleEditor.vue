@@ -102,7 +102,7 @@ export default {
       const ref = db.collection('Articles')
       const account = this.account
       const info = {
-        user: account,
+        author: account,
         ...this.article,
       }
       await ref.add(info)
