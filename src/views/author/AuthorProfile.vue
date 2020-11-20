@@ -52,7 +52,7 @@
       v-show="isEditing"
       variant="primary"
       class="confirm-button"
-      @click="updateAuthorProfile"
+      @click="submitAuthorProfile"
     >
       儲存
     </b-button>
@@ -67,8 +67,7 @@
   </section>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
-import { db } from '@/store/firebase.js'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import AuthorProfileField from '@/components/author/AuthorProfileField'
 
 // TODO: store images itself instead of store the url of images
@@ -93,12 +92,13 @@ export default {
   computed: {
     ...mapState({
       account: state => state.user.userInfo.account,
+      authorAccount: state => state.author.authorInfo.account,
       authorNickname: state => state.author.authorInfo.nickname,
       authorIntroduce: state => state.author.authorInfo.introduce,
-      authorSidebarInfo(state){
+      authorSidebarInfo(state) {
         const sidebarInfo = state.author.authorInfo.sidebarInfo
         if (sidebarInfo === undefined) {
-          return [...Array(3)]
+          return new Array(10).fill('')
         } else {
           return sidebarInfo
         }
@@ -110,7 +110,7 @@ export default {
     ]),
     isMyPage() {
       if (this.account !== undefined) {
-        return this.account === this.$route.params.account
+        return this.account === this.authorAccount
       }
       return false
     },
@@ -119,18 +119,24 @@ export default {
     this.setAuthorInfo()
   },
   methods: {
-    updateAuthorProfile: async function() {
-      const authorRef = db.collection('Users').doc(this.$route.params.account)
-      await authorRef.update(this.authorInfo)
+    ...mapActions([
+      'updateAuthorProfile',
+    ]),
+    submitAuthorProfile() {
+      this.updateAuthorProfile({
+        account: this.authorAccount,
+        ...this.authorInfo,
+      })
+
       this.isEditing = false
     },
     setAuthorInfo() {
       this.authorInfo = {
-        nickname: this.authorNickname,
-        sidebarInfo: this.authorSidebarInfo,
-        bannerSrc: this.authorBannerSrc,
-        photoSrc: this.authorPhotoSrc,
-        introduce: this.authorIntroduce,
+        nickname: this.authorNickname ? this.authorNickname : '',
+        bannerSrc: this.authorBannerSrc ? this.authorBannerSrc : '',
+        photoSrc: this.authorPhotoSrc ? this.authorPhotoSrc : '',
+        introduce: this.authorIntroduce ? this.authorIntroduce : '',
+        sidebarInfo: this.authorSidebarInfo?.length ? this.$_.cloneDeep(this.authorSidebarInfo) : '',
       }
     },
     cancelEdit() {

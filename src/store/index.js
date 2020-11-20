@@ -107,6 +107,13 @@ const moduleAuthor = {
       state.authorInfo.photoSrc = payload.photoSrc
       state.authorInfo.introduce = payload.introduce
     },
+    updateAuthorProfile: (state, payload) => {
+      state.authorInfo.nickname = payload.nickname
+      state.authorInfo.sidebarInfo = payload.sidebarInfo
+      state.authorInfo.bannerSrc = payload.bannerSrc
+      state.authorInfo.photoSrc = payload.photoSrc
+      state.authorInfo.introduce = payload.introduce
+    },
   },
   actions: {
     fetchAuthorInfo: async ({ commit }, { account }) => {
@@ -119,6 +126,15 @@ const moduleAuthor = {
           ...authorData,
         })
       }
+    },
+    updateAuthorProfile: async ({ commit }, authorInfo) => {
+      const authorAccount = authorInfo.account
+      delete authorInfo['account']
+
+      const authorRef = db.collection('Users').doc(authorAccount)
+      await authorRef.update(authorInfo)
+
+      commit('updateAuthorProfile', authorInfo)
     },
   },
   getters: {
