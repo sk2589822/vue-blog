@@ -12,6 +12,12 @@
         v-if="isLoggedIn"
         class="ml-auto"
       >
+        <router-link
+          class="user-icon"
+          :to="{ name: 'AuthorArticles', params: { account: userAccount } }"
+        >
+          <img :src="userPhotoSrc">
+        </router-link>
         <b-nav-item @click="logout">
           登出
         </b-nav-item>
@@ -37,17 +43,18 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      account: state => state.user.userInfo.account,
+      userAccount: state => state.user.userInfo.account,
     }),
     ...mapGetters([
       'isLoggedIn',
+      'userPhotoSrc',
     ]),
   },
   methods: {
     logout() {
       this.$cookies.remove('session_id')
       this.$store.dispatch('logout', {
-        account: this.account,
+        account: this.userAccount,
       })
     },
   },
@@ -58,5 +65,16 @@ export default {
   .navbar {
     height: 5vh;
     background-color: #222;
+  }
+
+  .user-icon {
+    margin: auto;
+    cursor: pointer;
+
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+    }
   }
 </style>

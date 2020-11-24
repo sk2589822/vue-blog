@@ -11,13 +11,11 @@ const moduleUser = {
     userInfo: {},
   },
   mutations: {
-    setUserInfo: (state, { account }) => {
-      state.userInfo = {
-        account,
-      }
+    setUserInfo: (state, payload) => {
+      state.userInfo = Object.assign({}, state.userInfo, payload)
     },
     logout: state => {
-      state.userInfo = {}
+      state.userInfo = Object.assign({})
     },
   },
   actions: {
@@ -65,7 +63,10 @@ const moduleUser = {
         if (!userSnapshot.empty) {
           const userDoc = userSnapshot.docs[0]
           if (sessionId === userDoc.data().sessionId) {
-            commit('setUserInfo', { account: userDoc.id })
+            commit('setUserInfo', {
+              account: userDoc.id,
+              photoSrc: userDoc.data().photoSrc,
+            })
           }
         }
       }
@@ -82,6 +83,13 @@ const moduleUser = {
   },
   getters: {
     isLoggedIn: state => !_.isEmpty(state.userInfo),
+    userPhotoSrc: state => {
+      if (state.userInfo.photoSrc) {
+        return state.userInfo.photoSrc
+      } else {
+        return 'https://i.imgur.com/VsCn3nL.png'
+      }
+    },
   },
 }
 

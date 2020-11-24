@@ -98,6 +98,10 @@ export default {
     this.fetchArticles()
     this.currentPage = this.$route.params.page || 1
   },
+  updated() {
+    this.fetchArticles()
+    this.currentPage = this.$route.params.page || 1
+  },
   methods: {
     fetchArticles() {
       const account = this.$route.params.account
