@@ -73,7 +73,7 @@ export default {
     }),
     isMyPage() {
       if (this.userAccount) {
-        return this.userAccount === this.$route.params.account
+        return this.userAccount === this.authorAccount
       }
       return false
     },
@@ -93,18 +93,23 @@ export default {
       const end = start + this.articlesPerPage
       return this.articles.slice(start, end)
     },
+    authorAccount() {
+      return this.$route.params.account
+    },
+  },
+  watch: {
+    authorAccount() {
+      this.fetchArticles()
+      this.currentPage = this.$route.params.page || 1
+    },
   },
   mounted() {
     this.fetchArticles()
     this.currentPage = this.$route.params.page || 1
   },
-  updated() {
-    this.fetchArticles()
-    this.currentPage = this.$route.params.page || 1
-  },
   methods: {
     fetchArticles() {
-      const account = this.$route.params.account
+      const account = this.authorAccount
       this.$store.dispatch('fetchArticles', {
         account,
       })
