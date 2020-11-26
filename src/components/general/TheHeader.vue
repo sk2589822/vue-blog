@@ -14,7 +14,7 @@
       >
         <router-link
           class="user-icon"
-          :to="{ name: 'AuthorArticles', params: { account: userAccount } }"
+          :to="{ name: 'AuthorPage', params: { account: userAccount } }"
         >
           <img :src="userPhotoSrc">
         </router-link>

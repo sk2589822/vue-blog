@@ -36,6 +36,14 @@ export default {
     ...mapGetters([
       'isAuthorExists',
     ]),
+    authorAccount() {
+      return this.$route.params.account
+    },
+  },
+  watch: {
+    authorAccount() {
+      this.fetchAuthorInfo()
+    },
   },
   mounted() {
     this.fetchAuthorInfo()
