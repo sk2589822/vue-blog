@@ -13,6 +13,7 @@
 
 ## Notes
   This project is mainly for practicing my Vue.js, so there are some improper practices.
+
   I'll fix them after I finish the front-end.
 
   - Password encrypting code in front-end
