@@ -11,12 +11,18 @@
       <nav class="author-nav">
         <ul class="author-nav-list">
           <li class="author-nav-item">
-            <router-link :to="`/authors/${authorAccount}/profile`">
+            <router-link
+              :to="`/author/${authorAccount}/profile`"
+              :class="{ 'is-current': currentNav === 'profile' }"
+            >
               個人檔案
             </router-link>
           </li>
           <li class="author-nav-item">
-            <router-link :to="`/authors/${authorAccount}/`">
+            <router-link
+              :to="`/author/${authorAccount}/`"
+              :class="{ 'is-current': currentNav === 'articles' }"
+            >
               文章列表
             </router-link>
           </li>
@@ -37,6 +43,13 @@ export default {
     ...mapGetters([
       'authorBannerSrc',
     ]),
+    currentNav() {
+      if (this.$route.name === 'AuthorProfile') {
+        return 'profile'
+      } else {
+        return 'articles'
+      }
+    },
   },
 }
 </script>
@@ -93,7 +106,7 @@ export default {
         margin: 0 auto;
       }
 
-      &.router-link-active {
+      &.is-current {
         color: #238ac5;
 
         &:after {

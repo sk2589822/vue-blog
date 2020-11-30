@@ -31,7 +31,7 @@ const routes = [
     component: Register,
   },
   {
-    path: '/authors/:account',
+    path: '/author/:account',
     component: AuthorPage,
     children: [
       {
@@ -41,6 +41,7 @@ const routes = [
       },
       {
         path: 'profile',
+        name: 'AuthorProfile',
         component: AuthorProfile,
       },
       {
