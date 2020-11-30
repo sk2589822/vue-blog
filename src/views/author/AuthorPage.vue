@@ -7,7 +7,7 @@
         <TheAuthorSidebar class="grid-sidebar" />
       </section>
     </template>
-    <template v-else>
+    <template v-else-if="isDataFetched">
       <div class="author-not-found">
         <h1>
           找不到這個人耶
@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      dataFetched: false,
+      isDataFetched: false,
     }
   },
   computed: {
@@ -53,6 +53,8 @@ export default {
       const account = this.$route.params.account
       this.$store.dispatch('fetchAuthorInfo', {
         account,
+      }).then(() => {
+        this.isDataFetched = true
       })
     },
   },

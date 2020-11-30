@@ -134,6 +134,10 @@ const moduleAuthor = {
           ...authorData,
         })
       }
+
+      return new Promise((resolve) => {
+        resolve()
+      })
     },
     updateAuthorProfile: async ({ commit }, authorInfo) => {
       const authorAccount = authorInfo.account
