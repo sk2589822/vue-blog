@@ -4,7 +4,7 @@
 
   https://vue-blog-8ed7d.web.app/
 
-## Featrues
+## Features
 
   -  Register/Login user account
   -  Edit user profile
