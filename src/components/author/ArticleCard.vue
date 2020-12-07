@@ -33,9 +33,9 @@
     <p class="post-date">
       {{ formattedDate }}
     </p>
-    <div v-if="preview">
+    <div v-if="isPreviewMode">
       <p
-        v-for="(item, index) in previewContent"
+        v-for="(item, index) in articlePreview"
         :key="index"
       >
         {{ item }}
@@ -62,7 +62,7 @@ export default {
         return {}
       },
     },
-    preview: {
+    isPreviewMode: {
       type: Boolean,
     },
   },
@@ -87,8 +87,18 @@ export default {
     showFunctionButtons() {
       return this.isMyPage && this.titleHover
     },
-    previewContent() {
-      return this.article.content.slice(0, 50).split('\n')
+    articlePreview() {
+      const previewLength = 50
+      const articleContent = this.article.content
+      const previewArray = articleContent
+        .slice(0, previewLength)
+        .trimEnd()
+        .split('\n')
+
+      if (articleContent.length > previewLength) {
+        previewArray[previewArray.length - 1] += '......'
+      }
+      return previewArray
     },
   },
   methods: {
@@ -185,6 +195,7 @@ export default {
     display: flex;
     justify-self: left;
     margin-top: 3px;
+    color: rgba(0, 0, 0, 0.54);
     font-size: 12px;
   }
 </style>

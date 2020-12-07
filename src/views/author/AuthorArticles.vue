@@ -32,7 +32,7 @@
           v-for="(article, index) of articlesToShow"
           :key="index"
           :article="article"
-          :preview="isPreviewMode"
+          :is-preview-mode="isPreviewMode"
         />
       </div>
       <div class="overflow-auto pagination">
