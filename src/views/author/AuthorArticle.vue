@@ -113,6 +113,11 @@ export default {
 
   .content {
     padding-top: 20px;
+
+    p::after {
+      content: "";
+      display: inline-block;
+    }
   }
 
   .article-pager-wrap {
