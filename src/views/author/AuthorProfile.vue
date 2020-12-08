@@ -147,7 +147,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped >
   .profile-section {
     position: relative;
     margin: 0 0 15px;

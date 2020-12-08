@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped >
   .sidebar {
     border: 1px solid rgba(0,0,0,.12);
     background-color: #fff;

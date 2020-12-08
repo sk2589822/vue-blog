@@ -97,7 +97,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped >
   .article {
     margin: 0 0 15px;
     border: 1px solid rgba(0, 0, 0, 0.12);

@@ -61,7 +61,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped >
   .contents {
     padding: 15px 12px;
     width: 100%

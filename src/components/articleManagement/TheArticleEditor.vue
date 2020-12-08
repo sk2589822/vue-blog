@@ -125,7 +125,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped >
   .form {
     margin-bottom: 100px;
   }

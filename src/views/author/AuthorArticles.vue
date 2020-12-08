@@ -128,7 +128,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped >
   @mixin main-theme {
     border: 1px solid #ddd;
     background: #fff;
