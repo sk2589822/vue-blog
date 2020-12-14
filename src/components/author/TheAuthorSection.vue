@@ -33,16 +33,14 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   computed: {
     ...mapState({
       authorAccount: state => state.author.authorInfo.account,
+      authorBannerSrc: state => state.author.authorInfo.bannerSrc,
     }),
-    ...mapGetters([
-      'authorBannerSrc',
-    ]),
     currentNav() {
       if (this.$route.name === 'AuthorProfile') {
         return 'profile'

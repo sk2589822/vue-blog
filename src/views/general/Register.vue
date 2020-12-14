@@ -87,6 +87,8 @@ export default {
       } else {
         await userRef.set({
           password: this.getHashedPassword(this.password),
+          photoSrc: 'https://i.imgur.com/VsCn3nL.png',
+          bannerSrc: 'https://i.imgur.com/v3WqLYF.png',
         })
 
         this.$swal({

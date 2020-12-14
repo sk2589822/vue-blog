@@ -29,17 +29,15 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   computed: {
     ...mapState({
       authorNickname: state => state.author.authorInfo.nickname,
       authorSidebarInfo: state => state.author.authorInfo.sidebarInfo,
+      authorPhotoSrc: state => state.author.authorInfo.photoSrc,
     }),
-    ...mapGetters([
-      'authorPhotoSrc',
-    ]),
   },
 }
 </script>

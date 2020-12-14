@@ -67,7 +67,7 @@
   </section>
 </template>
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import AuthorProfileField from '@/components/author/AuthorProfileField'
 
 // TODO: store images itself instead of store the url of images
@@ -95,6 +95,8 @@ export default {
       authorAccount: state => state.author.authorInfo.account,
       authorNickname: state => state.author.authorInfo.nickname,
       authorIntroduce: state => state.author.authorInfo.introduce,
+      authorPhotoSrc: state => state.author.authorInfo.photoSrc,
+      authorBannerSrc: state => state.author.authorInfo.bannerSrc,
       authorSidebarInfo(state) {
         const sidebarInfo = state.author.authorInfo.sidebarInfo
         if (sidebarInfo === undefined) {
@@ -104,10 +106,6 @@ export default {
         }
       },
     }),
-    ...mapGetters([
-      'authorPhotoSrc',
-      'authorBannerSrc',
-    ]),
     isMyPage() {
       if (this.account !== undefined) {
         return this.account === this.authorAccount

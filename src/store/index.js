@@ -150,23 +150,7 @@ const moduleAuthor = {
     },
   },
   getters: {
-    authorBannerSrc: state => {
-      if (state.authorInfo.bannerSrc) {
-        return state.authorInfo.bannerSrc
-      } else {
-        return 'https://i.imgur.com/v3WqLYF.png'
-      }
-    },
-    authorPhotoSrc: state => {
-      if (state.authorInfo.photoSrc) {
-        return state.authorInfo.photoSrc
-      } else {
-        return 'https://i.imgur.com/VsCn3nL.png'
-      }
-    },
-    isAuthorExists: state => {
-      return state.isAuthorExists
-    },
+    isAuthorExists: state => state.isAuthorExists,
   },
 }
 

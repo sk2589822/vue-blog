@@ -44,10 +44,10 @@ export default {
   computed: {
     ...mapState({
       userAccount: state => state.user.userInfo.account,
+      userPhotoSrc: state => state.user.userInfo.photoSrc,
     }),
     ...mapGetters([
       'isLoggedIn',
-      'userPhotoSrc',
     ]),
   },
   methods: {
