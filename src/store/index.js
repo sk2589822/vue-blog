@@ -83,13 +83,6 @@ const moduleUser = {
   },
   getters: {
     isLoggedIn: state => !_.isEmpty(state.userInfo),
-    userPhotoSrc: state => {
-      if (state.userInfo.photoSrc) {
-        return state.userInfo.photoSrc
-      } else {
-        return 'https://i.imgur.com/VsCn3nL.png'
-      }
-    },
   },
 }
 

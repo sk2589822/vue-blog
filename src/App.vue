@@ -55,6 +55,10 @@ export default {
     }
   }
 
+  li {
+    list-style-type: none;
+  }
+
   #app {
     display: grid;
     grid-template-rows: auto 1fr auto;

@@ -4,14 +4,11 @@
       toggleable="lg"
       type="dark"
     >
-      <b-navbar-brand href="#">
+      <b-navbar-brand :to="{ name: 'Home'}">
         JKBlog
       </b-navbar-brand>
-
-      <b-navbar-nav
-        v-if="isLoggedIn"
-        class="ml-auto"
-      >
+      <TheAuthorList class="ml-auto mr-2" />
+      <b-navbar-nav v-if="isLoggedIn">
         <router-link
           class="user-icon"
           :to="{ name: 'AuthorPage', params: { account: userAccount } }"
@@ -22,10 +19,7 @@
           登出
         </b-nav-item>
       </b-navbar-nav>
-      <b-navbar-nav
-        v-else
-        class="ml-auto"
-      >
+      <b-navbar-nav v-else>
         <b-nav-item to="/Login">
           登入
         </b-nav-item>
@@ -39,8 +33,12 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import TheAuthorList from '@/components/general/TheAuthorList'
 
 export default {
+  components: {
+    TheAuthorList,
+  },
   computed: {
     ...mapState({
       userAccount: state => state.user.userInfo.account,
