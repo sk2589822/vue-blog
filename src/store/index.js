@@ -42,7 +42,10 @@ const moduleUser = {
 
         authenticationSuccess = true
 
-        commit('setUserInfo', { account })
+        commit('setUserInfo', {
+          account,
+          photoSrc: userDoc.data().photoSrc,
+        })
       }
 
       return new Promise((resolve, reject) => {
