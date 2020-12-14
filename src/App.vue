@@ -27,8 +27,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
-
   * {
       outline: 0;
       -webkit-box-sizing: border-box;
@@ -47,8 +45,6 @@ export default {
     padding: 0;
     color: #222;
     background-color: #f3f6f9 !important;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 1.2rem;
 
     a:hover {
       text-decoration: none;
