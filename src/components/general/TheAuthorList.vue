@@ -7,10 +7,15 @@
       v-model="searchInput"
       class="author-search"
       placeholder="請輸入帳號或暱稱"
+      autocomplete="off"
+      @focus="isFocusing = true"
+      @blur="isFocusing = false"
     />
     <div
-      v-show="searchInput.length"
+      v-show="showAuthorList"
       class="author-search-result"
+      @mouseenter="hoveringList = true"
+      @mouseleave="hoveringList = false"
     >
       <ul class="author-search-result-list">
         <template v-if="searchResult.length == 0">
@@ -18,19 +23,20 @@
             找不到東西耶
           </li>
         </template>
-        <li
-          v-for="(authorInfo, index) in searchResult"
-          v-else
-          :key="index"
-          class="author-search-result-item"
-          @click="routerToAuthor(authorInfo.account)"
-        >
-          <img
-            :src="authorInfo.photoSrc"
-            class="author-search-result-image"
+        <template v-else>
+          <li
+            v-for="(authorInfo, index) in searchResult"
+            :key="index"
+            class="author-search-result-item"
+            @click="routerToAuthor(authorInfo.account)"
           >
-          <span class="author-search-result-account">{{ `${authorInfo.nickname} (${authorInfo.account})` }}</span>
-        </li>
+            <img
+              :src="authorInfo.photoSrc"
+              class="author-search-result-image"
+            >
+            <span class="author-search-result-account">{{ `${authorInfo.nickname} (${authorInfo.account})` }}</span>
+          </li>
+        </template>
       </ul>
     </div>
   </b-nav-form>
@@ -42,6 +48,8 @@ import { db } from '@/store/firebase.js'
 export default {
   data() {
     return {
+      focusingInput: false,
+      hoveringList: false,
       authors: [],
       searchInput: '',
     }
@@ -52,6 +60,9 @@ export default {
         return authorInfo.account.includes(this.searchInput) ||
           authorInfo.nickname.includes(this.searchInput)
       })
+    },
+    showAuthorList() {
+      return this.hoveringList || (this.searchInput.length && this.isFocusing)
     },
   },
   mounted() {
@@ -71,6 +82,8 @@ export default {
     },
     routerToAuthor(account) {
       this.searchInput = ''
+      this.hoveringList = false
+
       this.$router.push({
         name: 'AuthorPage',
         params: { account },
@@ -103,7 +116,7 @@ export default {
       }
     }
   }
-  
+
   .author-search-result {
     position: absolute;
     top: 100%;
