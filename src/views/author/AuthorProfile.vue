@@ -114,7 +114,7 @@ export default {
     },
   },
   mounted() {
-    this.setAuthorInfo()
+    this.loadAuthorInfo()
   },
   methods: {
     ...mapActions([
@@ -124,21 +124,21 @@ export default {
       this.updateAuthorProfile({
         account: this.authorAccount,
         ...this.authorInfo,
-      })
+      }).then(this.loadAuthorInfo)
 
       this.isEditing = false
     },
-    setAuthorInfo() {
+    loadAuthorInfo() {
       this.authorInfo = {
-        nickname: this.authorNickname ? this.authorNickname : '',
-        bannerSrc: this.authorBannerSrc ? this.authorBannerSrc : '',
-        photoSrc: this.authorPhotoSrc ? this.authorPhotoSrc : '',
+        nickname: this.authorNickname,
+        bannerSrc: this.authorBannerSrc,
+        photoSrc: this.authorPhotoSrc,
         introduce: this.authorIntroduce ? this.authorIntroduce : '',
         sidebarInfo: this.authorSidebarInfo?.length ? this.$_.cloneDeep(this.authorSidebarInfo) : '',
       }
     },
     cancelEdit() {
-      this.setAuthorInfo()
+      this.loadAuthorInfo()
       this.isEditing = false
     },
   },
