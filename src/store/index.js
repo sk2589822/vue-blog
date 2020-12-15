@@ -112,7 +112,6 @@ const moduleAuthor = {
       state.authorInfo.introduce = payload.introduce
     },
     updateAuthorProfile: (state, payload) => {
-      console.log(payload)
       state.authorInfo.nickname = payload.nickname
       state.authorInfo.sidebarInfo = payload.sidebarInfo
       state.authorInfo.bannerSrc = payload.bannerSrc
