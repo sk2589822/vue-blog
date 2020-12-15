@@ -2,13 +2,13 @@
   <li class="article">
     <img
       class="article-item author-photo"
-      :src="authorPhoto"
+      :src="authorInfo.photoSrc"
     >
     <router-link
       class="article-item article-author"
       :to="{ name: 'AuthorPage', params: { account: article.author } }"
     >
-      {{ article.author }}
+      {{ authorInfo.nickname }}
     </router-link>
     <span class="article-item article-post-date">
       {{ formattedDate }}
@@ -39,7 +39,10 @@ export default {
   },
   data() {
     return {
-      authorPhoto: '',
+      authorInfo: {
+        nickname: '',
+        photoSrc: '',
+      },
     }
   },
   computed: {
@@ -52,17 +55,16 @@ export default {
     },
   },
   created() {
-    this.getAuthorPhoto(this.article.author)
+    this.getAuthorInfo(this.article.author)
   },
   methods: {
-    getAuthorPhoto: async function(author) {
+    getAuthorInfo: async function(author) {
       const authorRef = db.collection('Users').doc(author)
       const authorDoc = await authorRef.get()
       const authorData = authorDoc.data()
 
-      if (authorData.photoSrc) {
-        this.authorPhoto = authorData.photoSrc
-      }
+      this.authorInfo.nickname = authorData.nickname
+      this.authorInfo.photoSrc = authorData.photoSrc
     },
   },
 }
