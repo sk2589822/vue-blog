@@ -53,6 +53,7 @@ export default {
   .sidebar-item {
     list-style: none;
     text-align: center;
+    overflow-wrap: break-word;
   }
 
   .author-photo-container {

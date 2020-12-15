@@ -29,7 +29,7 @@
             :src="authorInfo.photoSrc"
             class="author-search-result-image"
           >
-          <span class="author-search-result-account">{{ authorInfo.account }}</span>
+          <span class="author-search-result-account">{{ `${authorInfo.nickname} (${authorInfo.account})` }}</span>
         </li>
       </ul>
     </div>
@@ -85,25 +85,32 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 200px;
-  }
+    width: 300px;
 
-  .author-search,
-  .author-search:focus {
-    border-radius: 19px;
-    background: #444;
-    color: #fff;
+    form {
+      width: 100%;
 
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      .author-search,
+      .author-search:focus {
+        width: 100%;
+        border-radius: 19px;
+        background: #444;
+        color: #fff;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+      }
     }
   }
-
+  
   .author-search-result {
     position: absolute;
     top: 100%;
-    width: 200px;
+    width: 100%;
+    max-height: 200px;
     background: #444;
+    overflow-y: auto;
   }
 
   .author-search-result-list {

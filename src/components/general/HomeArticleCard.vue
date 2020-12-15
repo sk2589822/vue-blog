@@ -19,7 +19,7 @@
     >
       {{ article.title }}
     </router-link>
-    <span class="artile-item article-preview">
+    <span class="article-item article-preview">
       {{ articlePreview }}
     </span>
   </li>
@@ -83,6 +83,10 @@ export default {
     &:nth-child(3n) {
       border-right: none;
     }
+  }
+
+  .article-item {
+    overflow-wrap: break-word;
   }
 
   .author-photo {
