@@ -143,10 +143,6 @@ const moduleAuthor = {
       await authorRef.update(authorInfo)
 
       commit('updateAuthorProfile', authorInfo)
-
-      return new Promise((resolve) => {
-        resolve()
-      })
     },
   },
   getters: {

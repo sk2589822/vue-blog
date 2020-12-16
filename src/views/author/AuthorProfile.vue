@@ -121,10 +121,10 @@ export default {
       'updateAuthorProfile',
     ]),
     submitAuthorProfile() {
-      this.updateAuthorProfile({
+      this.updateAuthorProfile(this.$_.cloneDeep({
         account: this.authorAccount,
         ...this.authorInfo,
-      }).then(this.loadAuthorInfo)
+      }))
 
       this.isEditing = false
     },
