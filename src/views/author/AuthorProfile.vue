@@ -47,6 +47,13 @@
       :is-editing="isEditing"
       :tag="'textarea'"
     />
+    <b-alert
+      v-show="errorMessage.length"
+      show
+      variant="danger"
+    >
+      {{ errorMessage }}
+    </b-alert>
     <b-button
       v-if="isMyPage"
       v-show="isEditing"
@@ -85,8 +92,9 @@ export default {
         sidebarInfo: '',
         bannerSrc: '',
         photoSrc: '',
-        pntroduce: '',
+        introduce: '',
       },
+      errorMessage: '',
     }
   },
   computed: {
@@ -121,12 +129,46 @@ export default {
       'updateAuthorProfile',
     ]),
     submitAuthorProfile() {
+      if (!this.validateProfileData()) {
+        return
+      }
+      this.isEditing = false
+
       this.updateAuthorProfile(this.$_.cloneDeep({
         account: this.authorAccount,
         ...this.authorInfo,
       }))
+    },
+    validateProfileData() {
+      const itemsNeedValidation = [
+        {
+          value: this.authorInfo.nickname,
+          errorMessage: '請輸入暱稱',
+        },
+        {
+          value: this.authorInfo.bannerSrc,
+          errorMessage: '請輸入橫幅圖片網址',
+        },
+        {
+          value: this.authorInfo.photoSrc,
+          errorMessage: '請輸入大頭貼圖片網址',
+        },
+      ]
 
-      this.isEditing = false
+      const result = itemsNeedValidation.every(item => {
+        if (this.$_.isEmpty(item.value)) {
+          this.errorMessage = item.errorMessage
+          return false
+        } else {
+          return true
+        }
+      })
+
+      if (result) {
+        this.errorMessage = ''
+      }
+
+      return result
     },
     loadAuthorInfo() {
       this.authorInfo = {

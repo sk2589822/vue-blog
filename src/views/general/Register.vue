@@ -23,6 +23,13 @@
             @keypress.enter="register"
           />
         </div>
+        <b-alert
+          v-show="errorMessage.length"
+          show
+          variant="danger"
+        >
+          {{ errorMessage }}
+        </b-alert>
         <div>
           <b-button
             v-if="!submitted"
@@ -44,12 +51,6 @@
             已有帳號
           </router-link>
         </p>
-        <p
-          v-if="message !== ''"
-          class="message"
-        >
-          {{ message }}
-        </p>
       </form>
     </div>
   </div>
@@ -64,25 +65,22 @@ export default {
     return {
       account: '',
       password: '',
-      message: '',
+      errorMessage: '',
       submitted: false,
     }
   },
   methods: {
     register: async function() {
-      const validationResult = this.validateSubmitData(this.account, this.password)
-      if (!validationResult.result) {
-        this.message = validationResult.message
+      if (!this.validateSubmitData()) {
         return
       }
-
       this.submitted = true
 
       const userRef = db.collection('Users').doc(this.account)
       const userDoc = await userRef.get()
 
       if (userDoc.exists) {
-        this.message = '帳號已存在'
+        this.errorMessage = '帳號已存在'
         this.submitted = false
       } else {
         await userRef.set({
@@ -101,19 +99,47 @@ export default {
         })
       }
     },
-    validateSubmitData(account, password) {
-      let result = true
-      let message = ''
+    validateSubmitData() {
+      const validateLength = lowerBound => value => value.length > lowerBound
+      const validateCharacters = value => /^[a-zA-z0-9]+$/.test(value)
 
-      if (account.length < 8) {
-        message = '帳號不得小於8個字元'
-        result = false
-      } else if (password.length < 8) {
-        message = '密碼不得小於8個字元'
-        result = false
+      const itemsNeedValidation = [
+        {
+          value: this.account,
+          validateMethod: validateLength(3),
+          errorMessage: '帳號至少要有4個字元',
+        },
+        {
+          value: this.account,
+          validateMethod: validateCharacters,
+          errorMessage: '帳號只能為英文或數字',
+        },
+        {
+          value: this.password,
+          validateMethod: validateLength(3),
+          errorMessage: '密碼至少要有4個字元',
+        },
+        {
+          value: this.password,
+          validateMethod: validateCharacters,
+          errorMessage: '密碼只能為英文或數字',
+        },
+      ]
+
+      const result = itemsNeedValidation.every(item => {
+        if (!item.validateMethod(item.value)) {
+          this.errorMessage = item.errorMessage
+          return false
+        } else {
+          return true
+        }
+      })
+
+      if (result) {
+        this.errorMessage = ''
       }
 
-      return {result, message}
+      return result
     },
     getHashedPassword() {
       return sha512(this.password).toString()

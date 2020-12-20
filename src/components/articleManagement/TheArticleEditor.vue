@@ -1,5 +1,8 @@
 <template>
-  <form class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="editor">
       <label for="title">標題：</label>
       <b-form-input
@@ -18,6 +21,13 @@
         lazy
       />
     </div>
+    <b-alert
+      v-show="errorMessage.length"
+      show
+      variant="danger"
+    >
+      {{ errorMessage }}
+    </b-alert>
     <p class="editor-functions">
       <b-button
         variant="primary"
@@ -54,6 +64,7 @@ export default {
         content: '',
       },
       submitted: false,
+      errorMessage: '',
     }
   },
   computed: {
@@ -76,6 +87,9 @@ export default {
       'fetchArticles',
     ]),
     submitArticleData() {
+      if (!this.validateArticleData()) {
+        return
+      }
       this.submitted = true
 
       let title = ''
@@ -112,6 +126,33 @@ export default {
 
       const docRef = db.collection('Articles').doc(this.id)
       await docRef.update(this.article)
+    },
+    validateArticleData() {
+      const itemsNeedValidation = [
+        {
+          value: this.article.title,
+          errorMessage: '請輸入標題',
+        },
+        {
+          value: this.article.content,
+          errorMessage: '請輸入文章內容',
+        },
+      ]
+
+      const result = itemsNeedValidation.every(item => {
+        if (this.$_.isEmpty(item.value)) {
+          this.errorMessage = item.errorMessage
+          return false
+        } else {
+          return true
+        }
+      })
+
+      if (result) {
+        this.errorMessage = ''
+      }
+
+      return result
     },
     backToArticles() {
       this.$router.push({
