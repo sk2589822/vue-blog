@@ -1,11 +1,21 @@
 <template>
   <div class="articles-container">
-    <ul class="class-list">
-      <HomeArticleCard
-        v-for="(article, index) in latesetArticles"
-        :key="index"
-        :article="article"
-      />
+    <ul class="article-list">
+      <template v-if="isArticlesFetched">
+        <HomeArticleCard
+          v-for="(article, index) in latesetArticles"
+          :key="index"
+          :article="article"
+        />
+      </template>
+      <div
+        v-else
+        class="spinner-wrapper"
+      >
+        <b-spinner
+          variant="primary"
+        />
+      </div>
     </ul>
   </div>
 </template>
@@ -21,11 +31,15 @@ export default {
   data() {
     return {
       latesetArticles: [],
+      isArticlesFetched: false,
     }
   },
   mounted() {
     this.getlatesetArticles()
-      .then(data => this.latesetArticles = data)
+      .then(data => {
+        this.latesetArticles = data
+        this.isArticlesFetched = true
+      })
   },
   methods: {
     getlatesetArticles: async function() {
@@ -44,14 +58,22 @@ export default {
     justify-content: center;
     width: 100%;
     border: 1px solid #ddd;
-    border-bottom: none;
+    border-radius: 50px;
     background: #fff;
   }
 
-  .class-list {
+  .article-list {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0;
     width: 750px;
+  }
+
+  .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
   }
 </style>

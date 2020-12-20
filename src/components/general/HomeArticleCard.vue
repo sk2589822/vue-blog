@@ -77,13 +77,17 @@ export default {
     grid-template-columns: 50px 1fr;
     padding: 15px 15px 10px 15px;
     width: calc(100% / 3);
-    height: 250px;
+    height: 300px;
     border: 1px solid #ddd;
     border-top: none;
     border-left: none;
 
     &:nth-child(3n) {
       border-right: none;
+    }
+
+    &:nth-child(n+4) {
+      border-bottom: none;
     }
   }
 

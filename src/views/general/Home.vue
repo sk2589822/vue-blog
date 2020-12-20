@@ -21,7 +21,6 @@ export default {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
-    background: linear-gradient(rgb(181, 255, 211), white)
   }
 
   .latest-articles {
