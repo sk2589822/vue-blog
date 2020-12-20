@@ -19,9 +19,7 @@
     >
       {{ article.title }}
     </router-link>
-    <span class="article-item article-preview">
-      {{ articlePreview }}
-    </span>
+    <span class="article-item article-preview">{{ articlePreview }}</span>
   </li>
 </template>
 
@@ -125,5 +123,7 @@ export default {
   .article-preview {
     grid-row: 4 / 5;
     grid-column: 1 / 3;
+    overflow-y: hidden;
+    white-space: pre-wrap;
   }
 </style>
