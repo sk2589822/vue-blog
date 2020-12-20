@@ -24,11 +24,17 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      shouldNotLogin: true,
+    },
   },
   {
     path: '/register',
     name: 'Register',
     component: Register,
+    meta: {
+      shouldNotLogin: true,
+    },
   },
   {
     path: '/author/:account',

@@ -57,6 +57,8 @@ const moduleUser = {
       })
     },
     checkSession: async ({ commit }, { sessionId }) => {
+      let account = ''
+
       if (!_.isEmpty(sessionId)) {
         const userSnapshot = await db
           .collection('Users')
@@ -66,13 +68,22 @@ const moduleUser = {
         if (!userSnapshot.empty) {
           const userDoc = userSnapshot.docs[0]
           if (sessionId === userDoc.data().sessionId) {
+            account = userDoc.id
             commit('setUserInfo', {
-              account: userDoc.id,
+              account: account,
               photoSrc: userDoc.data().photoSrc,
             })
           }
         }
       }
+
+      return new Promise((resolve, reject) => {
+        if (account) {
+          resolve()
+        } else {
+          reject()
+        }
+      })
     },
     logout: ({ commit }, { account }) => {
       const userRef = db.collection('Users').doc(account)
