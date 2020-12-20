@@ -89,7 +89,16 @@ export default {
       return this.article.content.split('\n')
     },
   },
+  mounted() {
+    this.fetchArticles()
+  },
   methods: {
+    fetchArticles() {
+      const account = this.$route.params.account
+      this.$store.dispatch('fetchArticles', {
+        account,
+      })
+    },
     formatDate(date) {
       return new Date(date).format('yyyy年MM月dd日 hh:mm')
     },
