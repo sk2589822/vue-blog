@@ -8,14 +8,14 @@
       class="author-search"
       placeholder="請輸入帳號或暱稱"
       autocomplete="off"
-      @focus="isFocusing = true"
-      @blur="isFocusing = false"
+      @focus="isFocusingInput = true"
+      @blur="isFocusingInput = false"
     />
     <div
       v-show="showAuthorList"
       class="author-search-result"
-      @mouseenter="hoveringList = true"
-      @mouseleave="hoveringList = false"
+      @mouseenter="isHoveringList = true"
+      @mouseleave="isHoveringList = false"
     >
       <ul class="author-search-result-list">
         <template v-if="searchResult.length == 0">
@@ -48,8 +48,8 @@ import { db } from '@/store/firebase.js'
 export default {
   data() {
     return {
-      focusingInput: false,
-      hoveringList: false,
+      isFocusingInput: false,
+      isHoveringList: false,
       authors: [],
       searchInput: '',
     }
@@ -62,7 +62,7 @@ export default {
       })
     },
     showAuthorList() {
-      return this.hoveringList || (this.searchInput.length && this.isFocusing)
+      return this.searchInput.length && (this.isHoveringList || this.isFocusingInput)
     },
   },
   mounted() {
@@ -82,7 +82,7 @@ export default {
     },
     routerToAuthor(account) {
       this.searchInput = ''
-      this.hoveringList = false
+      this.isHoveringList = false
 
       this.$router.push({
         name: 'AuthorPage',
@@ -132,7 +132,7 @@ export default {
 
   .author-search-result-item {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     height: 50px;
     border-bottom: #000 solid 1px;
