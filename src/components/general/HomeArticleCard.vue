@@ -74,17 +74,11 @@ export default {
     grid-template-rows: auto auto min-content 1fr;
     grid-template-columns: 50px 1fr;
     padding: 15px 15px 10px 15px;
-    width: calc(100% / 3);
+    border-bottom: 1px solid #ddd;
+    width: 100%;
     height: 300px;
-    border: 1px solid #ddd;
-    border-top: none;
-    border-left: none;
 
-    &:nth-child(3n) {
-      border-right: none;
-    }
-
-    &:nth-child(n+4) {
+    &:last-child {
       border-bottom: none;
     }
   }
@@ -125,5 +119,20 @@ export default {
     grid-column: 1 / 3;
     overflow-y: hidden;
     white-space: pre-wrap;
+  }
+
+  @media screen and (min-width: 768px) {
+    .article {
+      border-right: 1px solid #ddd;
+      width: calc(100% / 3);
+
+      &:nth-child(3n+3) {
+        border-right: none;
+      }
+
+      &:nth-child(n+4) {
+        border-bottom: none;
+      }
+    }
   }
 </style>

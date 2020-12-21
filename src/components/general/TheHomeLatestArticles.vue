@@ -1,22 +1,28 @@
 <template>
-  <div class="articles-container">
-    <ul class="article-list">
-      <template v-if="isArticlesFetched">
+  <div class="articles-container d-flex justify-content-center w-100">
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <ul
+        v-if="isArticlesFetched"
+        class="article-list d-flex justify-content-center flex-wrap m-0"
+      >
         <HomeArticleCard
           v-for="(article, index) in latesetArticles"
           :key="index"
           :article="article"
         />
-      </template>
+      </ul>
       <div
         v-else
-        class="spinner-wrapper"
+        class="spinner-wrapper d-flex justify-content-center align-items-center"
       >
         <b-spinner
           variant="primary"
         />
       </div>
-    </ul>
+    </transition>
   </div>
 </template>
 
@@ -46,7 +52,7 @@ export default {
       const articlesDocs = await db.collection('Articles').orderBy('postDate', 'desc').get()
       return articlesDocs.docs
         .slice(0, 6)
-        .map(doc => Object.assign({},doc.data(), { id: doc.id }))
+        .map(doc => Object.assign({}, doc.data(), { id: doc.id }))
     },
   },
 }
@@ -54,26 +60,37 @@ export default {
 
 <style lang="scss" scoped>
   .articles-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    height: calc(100% - 3rem);
     border: 1px solid #ddd;
     border-radius: 50px;
     background: #fff;
   }
 
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
   .article-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0;
-    width: 750px;
+    width: 100%;
   }
 
   .spinner-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (min-width: 768px) {
+    .article-list {
+      width: 750px;
+    }
+
+    .spinner-wrapper {
+      width: 750px;
+      height: 600px;
+    }
   }
 </style>

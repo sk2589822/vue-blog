@@ -98,7 +98,6 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 300px;
 
     form {
       width: 100%;

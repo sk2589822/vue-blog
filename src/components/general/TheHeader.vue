@@ -7,26 +7,33 @@
       <b-navbar-brand :to="{ name: 'Home'}">
         JKBlog
       </b-navbar-brand>
-      <TheAuthorList class="ml-auto mr-2" />
-      <b-navbar-nav v-if="isLoggedIn">
-        <router-link
-          class="user-icon"
-          :to="{ name: 'AuthorPage', params: { account: userAccount } }"
-        >
-          <img :src="userPhotoSrc">
-        </router-link>
-        <b-nav-item @click="logout">
-          登出
-        </b-nav-item>
-      </b-navbar-nav>
-      <b-navbar-nav v-else>
-        <b-nav-item to="/Login">
-          登入
-        </b-nav-item>
-        <b-nav-item to="/Register">
-          註冊
-        </b-nav-item>
-      </b-navbar-nav>
+      <TheAuthorList class="w-50 m-auto ml-lg-auto mr-lg-2" />
+      <b-navbar-toggle target="nav-collapse" />
+
+      <b-collapse
+        id="nav-collapse"
+        is-nav
+      >
+        <b-navbar-nav v-if="isLoggedIn">
+          <router-link
+            class="user-icon mt-2 mt-lg-auto"
+            :to="{ name: 'AuthorPage', params: { account: userAccount } }"
+          >
+            <img :src="userPhotoSrc">
+          </router-link>
+          <b-nav-item @click="logout">
+            登出
+          </b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav v-else>
+          <b-nav-item to="/Login">
+            登入
+          </b-nav-item>
+          <b-nav-item to="/Register">
+            註冊
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
   </header>
 </template>
@@ -61,8 +68,15 @@ export default {
 
 <style lang="scss" scoped >
   .navbar {
-    height: 5vh;
     background-color: #222;
+  }
+
+  .nav-item {
+    text-align: center;
+  }
+
+  #nav-collapse {
+    flex-grow: 0;
   }
 
   .user-icon {
