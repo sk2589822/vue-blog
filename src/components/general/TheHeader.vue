@@ -1,13 +1,13 @@
 <template>
   <header>
     <b-navbar
-      toggleable="lg"
+      toggleable="md"
       type="dark"
     >
       <b-navbar-brand :to="{ name: 'Home'}">
         JKBlog
       </b-navbar-brand>
-      <TheAuthorList class="w-50 m-auto ml-lg-auto mr-lg-2" />
+      <TheAuthorList class="w-50 m-auto ml-md-auto mr-md-2" />
       <b-navbar-toggle target="nav-collapse" />
 
       <b-collapse
@@ -16,7 +16,7 @@
       >
         <b-navbar-nav v-if="isLoggedIn">
           <router-link
-            class="user-icon mt-2 mt-lg-auto"
+            class="user-icon mt-2 mt-md-auto"
             :to="{ name: 'AuthorPage', params: { account: userAccount } }"
           >
             <img :src="userPhotoSrc">

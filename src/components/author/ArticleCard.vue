@@ -2,8 +2,9 @@
   <article
     v-if="Object.keys(article).length > 0"
     class="article"
-    @mouseover="titleHover = true"
-    @mouseleave="titleHover = false"
+    @mouseover="mouseOver"
+    @mouseleave="mouseLeave"
+    @click="mobileClick"
   >
     <p class="article-header">
       <a
@@ -54,6 +55,7 @@
 import { mapActions, mapState } from 'vuex'
 import { db } from '@/store/firebase.js'
 
+
 export default {
   props: {
     article: {
@@ -68,7 +70,8 @@ export default {
   },
   data() {
     return {
-      titleHover: false,
+      isMobile: false,
+      isHoveringTitle: false,
     }
   },
   computed: {
@@ -85,7 +88,7 @@ export default {
       return new Date(this.article.postDate).format('yyyy年MM月dd日 hh:mm')
     },
     showFunctionButtons() {
-      return this.isMyPage && this.titleHover
+      return this.isMyPage && this.isHoveringTitle
     },
     articlePreview() {
       const previewLength = 50
@@ -101,10 +104,46 @@ export default {
       return previewArray
     },
   },
+  created() {
+    this.isMobile = window.matchMedia('(max-width: 767px)').matches
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
   methods: {
     ...mapActions([
       'fetchArticles',
     ]),
+    mouseOver() {
+      if (!this.isMobile) {
+        this.isHoveringTitle = true
+      }
+    },
+    mouseLeave() {
+      if (!this.isMobile) {
+        this.isHoveringTitle = false
+      }
+    },
+    mobileClick() {
+      if (this.isMobile && this.isMyPage) {
+        this.$swal({
+          title: '你要幹嘛？',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: '編輯文章',
+          cancelButtonColor: '#d33',
+          cancelButtonText: '刪除文章',
+        }).then(async (result) => {
+          console.log(result.dismiss)
+          if (result.isConfirmed) {
+            this.$router.push({ name: 'ArticleEdit', params: { id: this.article.id } })
+          } else if (result.dismiss === 'cancel'){
+            this.deleteArticle(this.article.id)
+          }
+        })
+      }
+    },
     toArticle(id) {
       this.$router.push({
         name: 'AuthorArticle',
@@ -121,6 +160,7 @@ export default {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         confirmButtonText: '確定刪除',
+        cancelButtonText: '取消',
       }).then(async (result) => {
         if (result.isConfirmed) {
           await db.collection('Articles').doc(id).delete()
@@ -131,6 +171,9 @@ export default {
           })
         }
       })
+    },
+    onResize() {
+      this.isMobile = window.matchMedia('(max-width: 767px)').matches
     },
   },
 }

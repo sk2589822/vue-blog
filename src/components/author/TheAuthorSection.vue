@@ -59,15 +59,29 @@ export default {
 
   .author-section-contents {
     margin: 0 auto;
-    width: 990px;
+    width: 100%;
     background-color: #fff;
   }
 
   .author-img-container {
-    height: 330px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    &::before {
+      display: block;
+      padding-top: 33.3333%;
+      width: 100%;
+      content: '';
+    }
   }
 
   .author-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     height: 100%;
   }
@@ -125,6 +139,12 @@ export default {
           transition: width .2s ease;
         }
       }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .author-section-contents {
+      max-width: 990px;
     }
   }
 </style>

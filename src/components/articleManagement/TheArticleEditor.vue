@@ -18,6 +18,7 @@
         class="article-content"
         placeholder="請輸入文章內容"
         rows="20"
+        no-resize
         lazy
       />
     </div>

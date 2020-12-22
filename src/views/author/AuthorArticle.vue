@@ -24,39 +24,37 @@
         </p>
       </div>
     </div>
-    <div class="article-pager-wrap">
-      <div class="article-pager">
-        <div
-          v-if="previousArticle"
-          class="article-pager-item previous"
-        >
-          <div class="navigation">
-            <font-awesome-icon icon="angle-left" />
-            上一篇
-          </div>
-          <div class="title text-ellipsis">
-            <router-link
-              :to="{ name: 'AuthorArticle', params: { id: previousArticle.id } }"
-            >
-              {{ previousArticle.title }}
-            </router-link>
-          </div>
+    <div class="article-pager">
+      <div
+        v-if="previousArticle"
+        class="article-pager-item"
+      >
+        <div class="navigation">
+          <font-awesome-icon icon="angle-left" />
+          上一篇
         </div>
-        <div
-          v-if="nextAtricle"
-          class="article-pager-item next"
-        >
-          <div class="navigation">
-            下一篇
-            <font-awesome-icon icon="angle-right" />
-          </div>
-          <div class="title text-ellipsis">
-            <router-link
-              :to="{ name: 'AuthorArticle', params: { id: nextAtricle.id } }"
-            >
-              {{ nextAtricle.title }}
-            </router-link>
-          </div>
+        <div class="title text-ellipsis">
+          <router-link
+            :to="{ name: 'AuthorArticle', params: { id: previousArticle.id } }"
+          >
+            {{ previousArticle.title }}
+          </router-link>
+        </div>
+      </div>
+      <div
+        v-if="nextAtricle"
+        class="article-pager-item"
+      >
+        <div class="navigation text-right">
+          下一篇
+          <font-awesome-icon icon="angle-right" />
+        </div>
+        <div class="title text-ellipsis">
+          <router-link
+            :to="{ name: 'AuthorArticle', params: { id: nextAtricle.id } }"
+          >
+            {{ nextAtricle.title }}
+          </router-link>
         </div>
       </div>
     </div>
@@ -128,49 +126,30 @@ export default {
       display: inline-block;
     }
   }
-
-  .article-pager-wrap {
-    display: flex;
-  }
-
   .article-pager {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 260px 260px;
+    display: flex;
+    justify-content: center;
     margin: 0 auto;
+    width: 80%;
   }
 
   .article-pager-item {
     position: relative;
-    padding: 14px 20px 14px 14px;
+    margin: 0 5px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
+    padding: 14px 20px 14px 14px;
+    width: 50%;
 
     .title {
       font-size: 20px;
-      color: #07b;
+      color: #007bff;
       text-align: center;
 
       &:hover {
         text-decoration: underline;
         cursor: pointer;
-      }
-    }
-
-    &.previous {
-      grid-row: 1;
-      grid-column: 1;
-      margin-right: 5px;
-    }
-
-    &.next {
-      grid-row: 1;
-      grid-column: 2;
-      margin-left: 5px;
-
-      .navigation {
-        text-align: end;
       }
     }
   }

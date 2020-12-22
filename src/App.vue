@@ -97,4 +97,10 @@ export default {
     }
   }
 
+  @media screen and (min-width: 768px) {
+    .main {
+      padding: 0 10px;
+    }
+  }
+
 </style>

@@ -4,7 +4,7 @@
       <TheAuthorSection />
       <section class="grid-container contents">
         <router-view class="grid-main" />
-        <TheAuthorSidebar class="grid-sidebar" />
+        <TheAuthorSidebar :class="['grid-sidebar', { 'show': needShowSidebar }]" />
       </section>
     </template>
     <template v-else-if="isDataFetched">
@@ -29,6 +29,7 @@ export default {
   },
   data() {
     return {
+      currentTab: '',
       isDataFetched: false,
     }
   },
@@ -38,6 +39,9 @@ export default {
     ]),
     authorAccount() {
       return this.$route.params.account
+    },
+    needShowSidebar() {
+      return this.$route.name === 'AuthorProfile'
     },
   },
   watch: {
@@ -63,6 +67,7 @@ export default {
 
 <style lang="scss" scoped >
   .contents {
+    margin: auto;
     padding: 15px 12px;
     width: 100%
   }
@@ -71,18 +76,20 @@ export default {
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 700px 290px;
+    grid-template-columns: 100%;
   }
 
   .grid-main {
-    grid-column: 1 / 2;
     grid-row: 3 / 6;
   }
 
-  .grid-sidebar{
-    margin-left: 15px;
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
+  .grid-sidebar {
+    display: none;
+    grid-row: 1 / 2;
+
+    &.show {
+      display: block;
+    }
   }
 
   .author-not-found {
@@ -90,5 +97,32 @@ export default {
     justify-content: center;
     align-items: center;
     height: 300px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .contents {
+      padding: 15px 0;
+    }
+
+    .latest-articles {
+      width: auto;
+      height: auto;
+    }
+
+    .grid-container {
+      grid-template-columns: 1fr 275px;
+      max-width: 990px;
+    }
+
+    .grid-main {
+      grid-column: 1 / 2;
+    }
+
+    .grid-sidebar {
+      display: block;
+      margin-left: 15px;
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
   }
 </style>
