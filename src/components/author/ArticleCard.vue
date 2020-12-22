@@ -4,7 +4,6 @@
     class="article"
     @mouseover="mouseOver"
     @mouseleave="mouseLeave"
-    @click="mobileClick"
   >
     <p class="article-header">
       <a
@@ -29,6 +28,14 @@
         @click="deleteArticle(article.id)"
       >
         刪除
+      </b-button>
+      <b-button
+        v-if="isMyPage && isMobile"
+        size="sm"
+        class="edit-button"
+        @click="mobileEditClick"
+      >
+        <font-awesome-icon icon="bars" />
       </b-button>
     </p>
     <p class="post-date">
@@ -125,9 +132,8 @@ export default {
         this.isHoveringTitle = false
       }
     },
-    mobileClick() {
-      if (this.isMobile && this.isMyPage) {
-        this.$swal({
+    mobileEditClick() {
+      this.$swal({
           title: '你要幹嘛？',
           icon: 'question',
           showCancelButton: true,
@@ -142,7 +148,6 @@ export default {
             this.deleteArticle(this.article.id)
           }
         })
-      }
     },
     toArticle(id) {
       this.$router.push({
@@ -226,8 +231,11 @@ export default {
 
   .article-title {
     justify-self: left;
-    font-size: 24px;
+    overflow:hidden;
     cursor: pointer;
+    font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:hover {
       text-decoration: underline;

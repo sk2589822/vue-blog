@@ -13,7 +13,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueSweetalert2 from 'vue-sweetalert2'
 import VueCookies from 'vue-cookies'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faAngleLeft, faBars } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -49,7 +49,7 @@ Vue.use(VueSweetalert2)
 
 Vue.use(VueCookies)
 
-library.add(faAngleRight, faAngleLeft, faGithub)
+library.add(faAngleRight, faAngleLeft, faBars, faGithub)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
