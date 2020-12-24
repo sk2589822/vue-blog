@@ -93,7 +93,6 @@ export default {
         this.$swal({
           icon: 'success',
           title:'註冊成功。',
-          heightAuto: false,
         }).then(() => {
           this.$router.push({ name:'Login' })
         })

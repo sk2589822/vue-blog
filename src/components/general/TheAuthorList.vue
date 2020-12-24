@@ -119,6 +119,7 @@ export default {
   .author-search-result {
     position: absolute;
     top: 100%;
+    z-index: 1;
     width: 100%;
     max-height: 200px;
     background: #444;

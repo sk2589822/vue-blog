@@ -49,7 +49,11 @@ export default {
     },
     articlePreview() {
       const previewLength = 50
-      return this.article.content.slice(0, previewLength)
+      let preview = this.article.content.slice(0, previewLength)
+      if (this.article.content.length > previewLength) {
+        preview += '......'
+      }
+      return preview
     },
   },
   created() {

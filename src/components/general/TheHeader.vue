@@ -73,6 +73,17 @@ export default {
 
   .nav-item {
     text-align: center;
+
+    @media screen and (max-width: 768px) {
+      margin: 0.5em;
+
+      .nav-link {
+        display: inline-block;
+        padding: 1em 5em;
+        border: 1px solid #777;
+        border-radius: 1em;
+      }
+    }
   }
 
   #nav-collapse {

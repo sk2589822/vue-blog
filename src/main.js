@@ -45,7 +45,11 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-Vue.use(VueSweetalert2)
+const swalOptions = {
+  heightAuto: false,
+}
+
+Vue.use(VueSweetalert2, swalOptions)
 
 Vue.use(VueCookies)
 

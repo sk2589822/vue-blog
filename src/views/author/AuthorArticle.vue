@@ -33,13 +33,12 @@
           <font-awesome-icon icon="angle-left" />
           上一篇
         </div>
-        <div class="title text-ellipsis">
-          <router-link
-            :to="{ name: 'AuthorArticle', params: { id: previousArticle.id } }"
-          >
-            {{ previousArticle.title }}
-          </router-link>
-        </div>
+        <router-link
+          class="title text-ellipsis d-block "
+          :to="{ name: 'AuthorArticle', params: { id: previousArticle.id } }"
+        >
+          {{ previousArticle.title }}
+        </router-link>
       </div>
       <div
         v-if="nextAtricle"
@@ -49,13 +48,12 @@
           下一篇
           <font-awesome-icon icon="angle-right" />
         </div>
-        <div class="title text-ellipsis">
-          <router-link
-            :to="{ name: 'AuthorArticle', params: { id: nextAtricle.id } }"
-          >
-            {{ nextAtricle.title }}
-          </router-link>
-        </div>
+        <router-link
+          class="title text-ellipsis d-block"
+          :to="{ name: 'AuthorArticle', params: { id: nextAtricle.id } }"
+        >
+          {{ nextAtricle.title }}
+        </router-link>
       </div>
     </div>
   </div>

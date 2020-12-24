@@ -78,7 +78,6 @@ export default {
       this.$swal({
         title: '抱歉',
         text: '我還沒做',
-        heightAuto: false,
       })
     },
     getHashedPassword() {
