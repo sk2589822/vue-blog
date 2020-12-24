@@ -17,27 +17,6 @@ import { faAngleRight, faAngleLeft, faBars } from '@fortawesome/free-solid-svg-i
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-router.beforeEach((to, from, next) => {
-  let checkSession = () => {
-    return store.dispatch('checkSession', {
-      sessionId: Vue.$cookies.get('session_id'),
-    })
-  }
-
-  if (to.meta.shouldNotLogin === true) { // e.g. login, register
-    checkSession()
-      .then(() => {
-        next({ name: 'Home'})
-      })
-      .catch(() => {
-        next()
-      })
-  } else {
-    next()
-  }
-})
-
-
 Object.defineProperty(Vue.prototype, '$_', { value: _ })
 
 // Install BootstrapVue
@@ -61,5 +40,15 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  mounted() {
+    this.checkSession()
+  },
+  methods: {
+    checkSession() {
+      store.dispatch('checkSession', {
+        sessionId: this.$cookies.get('session_id'),
+      })
+    },
+  },
   render: (h) => h(App),
 }).$mount('#app')

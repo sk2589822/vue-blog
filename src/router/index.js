@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store'
 import VueRouter from 'vue-router'
 import ArticleManagement from '@/views/articleManagement/ArticleManagement'
 import ArticleCreate from '@/views/articleManagement/ArticleCreate'
@@ -92,6 +93,26 @@ const router = new VueRouter({
   scrollBehavior() {
     return { x: 0, y: 0 }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  let checkSession = () => {
+    return store.dispatch('checkSession', {
+      sessionId: Vue.$cookies.get('session_id'),
+    })
+  }
+
+  checkSession()
+    .then(() => {
+      if (to.meta.shouldNotLogin === true) { // e.g. login, register
+        next({ name: 'Home'})
+      } else {
+        next()
+      }
+    })
+    .catch(() => {
+      next({ name: 'Home'})
+    })
 })
 
 export default router
