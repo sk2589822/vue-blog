@@ -187,13 +187,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .profile-section {
     position: relative;
     margin: 0 0 15px;
     border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: 30px 50px;
     background-color: #fff;
+    padding: 30px 50px;
   }
 
   .edit-button {

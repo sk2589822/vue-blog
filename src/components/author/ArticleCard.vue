@@ -184,12 +184,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .article,
   .no-article {
     display: flex;
-    min-height: 100px;
     background-color: #fff;
+    min-height: 100px;
   }
 
   .article {
@@ -203,7 +203,7 @@ export default {
     }
 
     &:last-of-type {
-      border-bottom: none;
+      border-bottom: 0;
     }
   }
 
@@ -228,11 +228,10 @@ export default {
     }
   }
 
-
   .article-title {
     justify-self: left;
-    overflow:hidden;
     cursor: pointer;
+    overflow: hidden;
     font-size: 24px;
     text-overflow: ellipsis;
     white-space: nowrap;

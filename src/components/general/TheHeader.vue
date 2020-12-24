@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .navbar {
     background-color: #222;
   }
@@ -79,9 +79,9 @@ export default {
 
       .nav-link {
         display: inline-block;
-        padding: 1em 5em;
         border: 1px solid #777;
         border-radius: 1em;
+        padding: 1em 5em;
       }
     }
   }
@@ -91,13 +91,13 @@ export default {
   }
 
   .user-icon {
-    margin: auto;
     cursor: pointer;
+    margin: auto;
 
     img {
+      border-radius: 20px;
       width: 30px;
       height: 30px;
-      border-radius: 20px;
     }
   }
 </style>

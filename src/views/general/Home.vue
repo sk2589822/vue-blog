@@ -22,8 +22,8 @@ export default {
 <style lang="scss" scoped>
   .home {
     display: grid;
-    grid-template-columns: auto;
     grid-template-rows: auto;
+    grid-template-columns: auto;
     padding: 15px 10px;
   }
 

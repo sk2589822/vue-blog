@@ -77,13 +77,13 @@ export default {
     display: grid;
     grid-template-rows: auto auto min-content 1fr;
     grid-template-columns: 50px 1fr;
-    padding: 15px 15px 10px 15px;
     border-bottom: 1px solid #ddd;
+    padding: 15px 15px 10px;
     width: 100%;
     height: 300px;
 
     &:last-child {
-      border-bottom: none;
+      border-bottom: 0;
     }
   }
 
@@ -94,9 +94,9 @@ export default {
   .author-photo {
     grid-row: 1 / 3;
     grid-column: 1 / 2;
+    border-radius: 50%;
     width: 45px;
     height: 45px;
-    border-radius: 50%;
   }
 
   .article-author {
@@ -131,11 +131,11 @@ export default {
       width: calc(100% / 3);
 
       &:nth-child(3n+3) {
-        border-right: none;
+        border-right: 0;
       }
 
       &:nth-child(n+4) {
-        border-bottom: none;
+        border-bottom: 0;
       }
     }
   }

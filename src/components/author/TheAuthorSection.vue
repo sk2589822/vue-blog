@@ -52,21 +52,21 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .author-section {
     margin-top: 15px;
   }
 
   .author-section-contents {
     margin: 0 auto;
-    width: 100%;
     background-color: #fff;
+    width: 100%;
   }
 
   .author-img-container {
     position: relative;
-    overflow: hidden;
     width: 100%;
+    overflow: hidden;
 
     &::before {
       display: block;
@@ -79,9 +79,9 @@ export default {
   .author-img {
     position: absolute;
     top: 0;
-    left: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
   }
@@ -99,33 +99,23 @@ export default {
     list-style: none;
 
     a {
-      position: relative;
       display: flex;
+      position: relative;
       justify-content: center;
       align-items: center;
       height: 50px;
       color: #777;
 
-      &:after {
-        background-color: transparent;
-        content: '';
-        width: 0;
-        height: 3px;
+      &::after {
         position: absolute;
+        right: 0;
         bottom: 0;
         left: 0;
-        right: 0;
         margin: 0 auto;
-      }
-
-      &.is-current {
-        color: #238ac5;
-
-        &:after {
-          background-color: #238ac5;
-          width: 100%;
-          transition: width .2s ease;
-        }
+        background-color: transparent;
+        width: 0;
+        height: 3px;
+        content: '';
       }
     }
 
@@ -133,12 +123,22 @@ export default {
       a {
         color: #238ac5;
 
-        &:after {
+        &::after {
+          transition: width 0.2s ease;
           background-color: #238ac5;
           width: 100%;
-          transition: width .2s ease;
         }
       }
+    }
+  }
+
+  .is-current {
+    color: #238ac5;
+
+    &::after {
+      transition: width 0.2s ease;
+      background-color: #238ac5;
+      width: 100%;
     }
   }
 

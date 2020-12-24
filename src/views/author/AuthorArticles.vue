@@ -128,7 +128,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   @mixin main-theme {
     border: 1px solid #ddd;
     background: #fff;
@@ -136,9 +136,10 @@ export default {
 
   .functions-bar {
     @include main-theme;
+
     display: flex;
-    padding: 17px 15px;
     margin-bottom: 20px;
+    padding: 17px 15px;
   }
 
   .view-options {
@@ -150,9 +151,9 @@ export default {
   }
 
   .view-mode-button.active {
-    color: #fff;
-    background-color: #007bff;
     border-color: #007bff;
+    background-color: #007bff;
+    color: #fff;
   }
 
   .articles-list {

@@ -60,17 +60,19 @@ export default {
 
 <style lang="scss" scoped>
   .articles-container {
-    height: calc(100% - 3rem);
     border: 1px solid #ddd;
     border-radius: 50px;
     background: #fff;
+    height: calc(100% - 3rem);
   }
 
-  .fade-enter-active, .fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     transition: opacity 0.5s;
   }
 
-  .fade-enter, .fade-leave-to {
+  .fade-enter,
+  .fade-leave-to {
     opacity: 0;
   }
 

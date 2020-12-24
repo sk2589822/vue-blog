@@ -95,8 +95,8 @@ export default {
 
 <style lang="scss" scoped>
   .author-list-container {
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: column;
 
     form {
@@ -104,9 +104,9 @@ export default {
 
       .author-search,
       .author-search:focus {
-        width: 100%;
         border-radius: 19px;
         background: #444;
+        width: 100%;
         color: #fff;
 
         &::placeholder {
@@ -120,9 +120,9 @@ export default {
     position: absolute;
     top: 100%;
     z-index: 1;
+    background: #444;
     width: 100%;
     max-height: 200px;
-    background: #444;
     overflow-y: auto;
   }
 
@@ -134,12 +134,12 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 50px;
-    border-bottom: #000 solid 1px;
     cursor: pointer;
+    border-bottom: #000 solid 1px;
+    height: 50px;
 
     &:last-child {
-      border-bottom: none;
+      border-bottom: 0;
     }
 
     &:hover {
@@ -148,17 +148,17 @@ export default {
 
     &.no-result {
       justify-content: center;
+      cursor: initial;
       background: #444;
       color: #fff;
-      cursor: initial;
     }
   }
 
   .author-search-result-image {
     margin: 0 10px;
+    border-radius: 15px;
     width: 30px;
     height: 30px;
-    border-radius: 15px;
   }
 
   .author-search-result-account {

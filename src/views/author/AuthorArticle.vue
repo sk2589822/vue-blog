@@ -102,12 +102,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .article {
     margin: 0 0 15px;
     border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: 30px 50px;
     background-color: #fff;
+    padding: 30px 50px;
   }
 
   .date {
@@ -120,10 +120,11 @@ export default {
     padding-top: 20px;
 
     p::after {
-      content: "";
       display: inline-block;
+      content: '';
     }
   }
+
   .article-pager {
     display: flex;
     justify-content: center;
@@ -134,28 +135,28 @@ export default {
   .article-pager-item {
     position: relative;
     margin: 0 5px;
-    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #fff;
     padding: 14px 20px 14px 14px;
     width: 50%;
 
     .title {
-      font-size: 20px;
       color: #007bff;
+      font-size: 20px;
       text-align: center;
 
       &:hover {
-        text-decoration: underline;
         cursor: pointer;
+        text-decoration: underline;
       }
     }
   }
 
   .text-ellipsis {
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
 </style>

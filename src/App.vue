@@ -28,27 +28,28 @@ export default {
 
 <style lang="scss">
   * {
-      outline: 0;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    outline: 0;
+    padding: 0;
   }
 
-  html, body, #app {
+  html,
+  body,
+  #app {
     width: 100%;
     height: 100%;
   }
 
   body {
     position: relative;
+    background-color: #f3f6f9 !important;
     padding: 0;
     color: #222;
-    background-color: #f3f6f9 !important;
+  }
 
-    a:hover {
-      text-decoration: none;
-    }
+  a:hover {
+    text-decoration: none;
   }
 
   li {
@@ -60,9 +61,9 @@ export default {
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 100%;
     grid-template-areas:
-        'header'
-        'main'
-        'footer';
+      'header'
+      'main'
+      'footer';
     height: 100%;
   }
 
@@ -76,14 +77,14 @@ export default {
 
   .footer {
     grid-area: footer;
-    color: rgba(255, 255, 255, 0.7);
     background-color: #455473;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .about-me {
     display: flex;
     align-items: center;
-    margin: 15px auto 15px;
+    margin: 15px auto;
     width: 90%;
     height: 30px;
 

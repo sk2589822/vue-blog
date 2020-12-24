@@ -148,21 +148,21 @@ export default {
 </script>
 
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .container {
     display: flex;
-    height: 100%;
     width: 100%;
+    height: 100%;
   }
 
   .card {
     display: flex;
     margin: auto;
+    box-shadow: 0 4px 3px rgba(106, 131, 134, 0.1);
+    background: rgba(250, 250, 250, 0.92);
     padding: 50px 70px;
     width: 450px;
     height: auto;
-    background: rgba(250, 250, 250, 0.92);
-    box-shadow: 0px 4px 3px rgba(106, 131, 134, 0.1);
   }
 
   .title {
@@ -176,7 +176,7 @@ export default {
       border: 1px solid #d9d9d9;
 
       &:focus {
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -192,8 +192,8 @@ export default {
   }
 
   .message {
-    text-align: center;
-    font-weight: bold;
     color: #f00;
+    font-weight: bold;
+    text-align: center;
   }
 </style>

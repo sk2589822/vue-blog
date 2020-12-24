@@ -65,18 +65,18 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .contents {
     margin: auto;
     padding: 15px 12px;
-    width: 100%
+    width: 100%;
   }
 
   .grid-container {
     display: grid;
+    grid-template-columns: 100%;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 100%;
   }
 
   .grid-main {
@@ -120,9 +120,9 @@ export default {
 
     .grid-sidebar {
       display: block;
-      margin-left: 15px;
-      grid-column: 2 / 3;
       grid-row: 3 / 4;
+      grid-column: 2 / 3;
+      margin-left: 15px;
     }
   }
 </style>

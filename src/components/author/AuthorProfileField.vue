@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .field {
     display: flex;
     flex-wrap: wrap;
@@ -107,8 +107,8 @@ export default {
   }
 
   .edit {
-    color: #238ac5;
     cursor: pointer;
+    color: #238ac5;
   }
 
   .btn {

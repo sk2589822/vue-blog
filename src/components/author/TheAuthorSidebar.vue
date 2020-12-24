@@ -42,12 +42,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .sidebar {
-    border: 1px solid rgba(0,0,0,.12);
-    background-color: #fff;
-    margin: 0 0 15px;
     position: relative;
+    margin: 0 0 15px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: #fff;
   }
 
   .sidebar-item {
