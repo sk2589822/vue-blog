@@ -40,15 +40,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  mounted() {
-    this.checkSession()
-  },
-  methods: {
-    checkSession() {
-      store.dispatch('checkSession', {
-        sessionId: this.$cookies.get('session_id'),
-      })
-    },
-  },
   render: (h) => h(App),
 }).$mount('#app')

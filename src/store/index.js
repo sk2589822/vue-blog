@@ -57,7 +57,7 @@ const moduleUser = {
       })
     },
     checkSession: async ({ commit }, { sessionId }) => {
-      let account = ''
+      let isSessionAlive = false
 
       if (!_.isEmpty(sessionId)) {
         const userSnapshot = await db
@@ -68,22 +68,16 @@ const moduleUser = {
         if (!userSnapshot.empty) {
           const userDoc = userSnapshot.docs[0]
           if (sessionId === userDoc.data().sessionId) {
-            account = userDoc.id
+            isSessionAlive = true
             commit('setUserInfo', {
-              account: account,
+              account: userDoc.id,
               photoSrc: userDoc.data().photoSrc,
             })
           }
         }
       }
 
-      return new Promise((resolve, reject) => {
-        if (account) {
-          resolve()
-        } else {
-          reject()
-        }
-      })
+      return Promise.resolve(isSessionAlive)
     },
     logout: ({ commit }, { account }) => {
       const userRef = db.collection('Users').doc(account)

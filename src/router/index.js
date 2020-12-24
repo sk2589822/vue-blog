@@ -103,15 +103,12 @@ router.beforeEach((to, from, next) => {
   }
 
   checkSession()
-    .then(() => {
-      if (to.meta.shouldNotLogin === true) { // e.g. login, register
+    .then(isSessionAlive => {
+      if (isSessionAlive && to.meta.shouldNotLogin === true) {// e.g. login, register
         next({ name: 'Home'})
       } else {
         next()
       }
-    })
-    .catch(() => {
-      next({ name: 'Home'})
     })
 })
 
