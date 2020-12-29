@@ -11,6 +11,7 @@
   -  Create/Edit/Update/Delete own articles
   -  Search authors by account or nickname
   -  Visit others' articles & profiles
+  -  RWD
 
 ## Notes
 
