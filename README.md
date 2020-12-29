@@ -9,9 +9,11 @@
   -  Register/Login user account
   -  Edit user profile
   -  Create/Edit/Update/Delete own articles
-  -  visit others' articles & profiles
+  -  Search authors by account or nickname
+  -  Visit others' articles & profiles
 
 ## Notes
+
   This project is mainly for practicing my Vue.js, so there are some improper practices.
 
   I'll fix them after I finish the front-end.
