@@ -36,12 +36,10 @@ const moduleUser = {
       let sessionId
       if (userDoc.exists && password === userDoc.data().password) {
         sessionId = randomString(64)
-        userRef.set({
+        userRef.update({
           sessionId,
-        }, { merge: true })
-
+        })
         authenticationSuccess = true
-
         commit('setUserInfo', {
           account,
           photoSrc: userDoc.data().photoSrc,
@@ -67,11 +65,13 @@ const moduleUser = {
 
         if (!userSnapshot.empty) {
           const userDoc = userSnapshot.docs[0]
-          if (sessionId === userDoc.data().sessionId) {
+          const userData = userDoc.data()
+          if (sessionId === userData.sessionId) {
             isSessionAlive = true
+            console.log(userData)
             commit('setUserInfo', {
               account: userDoc.id,
-              photoSrc: userDoc.data().photoSrc,
+              photoSrc: userData.photoSrc,
             })
           }
         }
